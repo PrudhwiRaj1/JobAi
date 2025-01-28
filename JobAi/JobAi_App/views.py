@@ -28,3 +28,5 @@ def main(request):
     return render(request,'index.html')
 def Register(request):
     return render(request,'register.html')
+def Forgot_pwd(request):
+    return render(request,'forgot-password.html')

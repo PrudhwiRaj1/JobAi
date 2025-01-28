@@ -7,6 +7,7 @@ body {
 
 .container {
     max-width: 600px;
+    margin: 50px 10%;
     padding: 20px;
     background: white;
     border-radius: 10px;
@@ -51,8 +52,8 @@ button:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-#container1
+/* #container1
 {
     
     margin-top: 10%;
-}
+} */

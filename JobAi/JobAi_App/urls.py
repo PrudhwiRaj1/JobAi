@@ -12,4 +12,5 @@ urlpatterns = [
     path('upload/', read_word_document, name='read_word_document'),
     path('login/',views.login,name="login"),
     path('Register/',views.Register,name='Register'),
+    path('Forgot Password/',views.Forgot_pwd,name='Forgot Password')
 ]
