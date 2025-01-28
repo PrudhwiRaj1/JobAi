@@ -1,1 +1,1 @@
-# **Job-AI:AI Powered Job Search**
+# **JobAi:AI Powered Job Search**
