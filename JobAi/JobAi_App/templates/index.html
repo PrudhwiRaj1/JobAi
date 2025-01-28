@@ -33,7 +33,7 @@
 	<!-- navbar -->
 	<nav class="navbar px-0 flex justify-between items-start">
 		<div class="flex flex-col sm:flex-row gap-4 justify-start mt-2">
-			<a href="/">
+			<a href="">
 				<img src="{% static 'images/JobAi2.png'%}" alt="JobAi" class="h-10" style="height: 100px;border-radius: 25px;box-shadow: 0 0 20px rgb(48, 35, 229);">
 			</a>
 
@@ -58,7 +58,7 @@
 			<p class="text-lg [text-wrap:balance] font-bold" style="color:rgb(28, 5, 80);">
 				Get a job specific cover letter, resume and followup email instantly – undetected! </p>
 			<div class="flex flex-col gap-4 sm:flex-row">
-				<a href="{%url 'login'%}" class="btn btn-primary px-10 group" id="mainCTA">
+				<a href="{%url 'login'%}" class="btn btn-primary px-10 group" id="mainCTA" style="background-color: rgb(167, 49, 226);">
 					<span>
 						Start now for free </span>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
@@ -303,7 +303,7 @@
 			<p class="text-sm">
 				Let AI apply to thousands of jobs for you automatically. Save time and get hired faster. </p>
 			<img loading="lazy" src="{% static 'images/auto-apply-fresh1.jpg' %}" alt="ai apply to jobs"
-				class="rounded-box" />
+				class="rounded-box" style="height: 190px;" />
 		</div>
 		<div class="flex flex-col gap-6">
 			<h3 class="text-xl font-bold">AI Interview Practice</h3>
@@ -431,10 +431,9 @@
 
 		</a>
 
-		<nav class="my-4 flex flex-col gap-1">
-			<img src="{% static 'images/google-cloud-partner.webp' %}" alt="Google Cloud Partner" width="150"
-				class="rounded-lg border">
-			<a href="/privacy-policy">Privacy Policy</a>
+		<nav class="my-4 flex flex-col">
+			<img src="{% static 'images/JobAi2.png'%}" alt="JobAi" class="h-10" style="height: 50px;border-radius: 25px;box-shadow: 0 0 20px rgb(48, 35, 229);">
+	<br><br>		<a href="/privacy-policy">Privacy Policy</a>
 			<a href="/terms-of-service">Terms of Service</a>
 			<a href="/influencer-program">Affiliate Program</a>
 			<a href="/students">Student discount</a>
