@@ -1,17 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobAI | Upload Resume</title>
- <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
- <link rel="icon" href="{% static 'images/JobAi-Logo.png' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+    <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
 </head>
+
 <body style="background-image: url('../static/images/bg1.png')">
     <div class="container" id="container1">
         <h1>Upload and Read Word Document</h1>
-        <form method="POST" enctype="multipart/form-data" action= "{% url 'read_word_document' %}">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'read_word_document' %}">
             {% csrf_token %}
             <input type="file" name="word_file" accept=".doc,.docx" required>
             <button type="submit">Upload and Read</button>
@@ -25,4 +27,5 @@
         {% endif %}
     </div>
 </body>
+
 </html>
