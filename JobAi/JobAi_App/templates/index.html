@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="{% static 'assets/css/index.css'%}">
 <body
 	class="grid grid-cols-[1fr_1rem_repeat(2,min(37.5rem,calc(50%-1rem)))_1rem_1fr] bg-top bg-no-repeat [background-size:200vw] lg:[background-size:100%_62rem] [:where(&>*)]:[grid-column:3/5]"
-	style="background: url('static/images/bg1.png');opacity: 0.64;">
+	style="background-image: url('static/images/bg1.png');opacity: 0.7;">
 
 	<!-- navbar -->
 	<nav class="navbar px-0 flex justify-between items-start">
@@ -51,14 +51,14 @@
 	</nav>
 	<!-- hero -->
 	<div
-		class="grid place-content-center items-center gap-y-6 overflow-hidden [grid-column:3/5] lg:h-[clamp(40rem,calc(100vh-4rem),50rem)] lg:justify-between lg:[grid-column:3/7] lg:[grid-template-columns:subgrid]">
+		class="grid place-content-center items-center gap-y-6 overflow-hidden [grid-column:3/5] lg:h-[clamp(40rem,calc(100vh-4rem),50rem)] lg:justify-between lg:[grid-column:3/7] lg:[grid-template-columns:subgrid]" >
 		<div class="z-[1] flex flex-col items-start gap-6 py-6">
 			<h1 class="relative font-title text-[clamp(4rem,20vw,3.75rem)] leading-none">
-				<b style="color:white;background-color: blue;border-radius: 15px;">Automate</b> <span class="font-bold" style="color: rgb(167, 49, 226);"> your</span><br /><span class='font-bold' style="color: rgb(167, 49, 226);">job search</span> <span class="font-bold" style="color:white;background-color:blue;border-radius: 15px;"> with AI </span></h1>
+				<b style="color:white;background-color: blue;border-radius: 15px;">Automate</b> <span class="font-bold" style="color: rgb(60, 7, 87);"> your</span><br /><span class='font-bold' style="color: rgb(60, 7, 87);">job search</span> <span class="font-bold" style="color:white;background-color:blue;border-radius: 15px;"> with AI </span></h1>
 			<p class="text-lg [text-wrap:balance] font-bold opacity-90" style="color:rgb(1, 5, 26);">
 				Get a job specific cover letter, resume and followup email instantly – undetected! </p>
 			<div class="flex flex-col gap-4 sm:flex-row">
-				<a href="{%url 'login'%}" class="btn btn-primary px-10 group" id="mainCTA">
+				<a href="{%url 'login'%}" class="btn btn-primary px-10 group font-bolder" id="mainCTA">
 					<span>
 						Start now for free </span>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
@@ -166,7 +166,7 @@
 	</h2>
 
 	<!-- top features -->
-	<div class="grid gap-1 py-1 lg:grid-cols-3">
+	<div class="grid gap-1 py-1 lg:grid-cols-3" >
 		<div class="flex flex-col items-center gap-8 rounded-box bg-gradient-to-b from-base-200 py-10">
 			<!-- <div class="aspect-square p-2 bg-accent font-title font-bold text-xl rounded-full grid place-content-center">
         <svg class="text-accent-content" width="16" height="16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 24L20 34L40 14" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -432,7 +432,7 @@
 		</a>
 
 		<nav class="my-4 flex flex-col">
-			<img src="{% static 'images/JobAi2.png'%}" alt="JobAi" class="h-10" style="height: 50px;border-radius: 25px;box-shadow: 0 0 20px rgb(48, 35, 229);">
+			<img src="{% static 'images/JobAi2.png'%}" alt="JobAi" class="h-10" style="height: 50px;border-radius: 25px;box-shadow: 0 0 15px rgb(48, 35, 229);">
 	<br><br>		<a href="/privacy-policy">Privacy Policy</a>
 			<a href="/terms-of-service">Terms of Service</a>
 			<a href="/influencer-program">Affiliate Program</a>
@@ -503,7 +503,7 @@
 	</footer>
 	<!-- Add floating CTA -->
 	<div id="floatingCTA" class="fixed bottom-4 end-4 z-50 hidden lg:hidden">
-		<a href="/signin" class="btn btn-accent shadow-lg">
+		<a href="/signin" class="btn btn-primary shadow-lg ">
 			Start now for free <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
 				class="size-6">
 				<path fill-rule="evenodd"
