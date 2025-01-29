@@ -7,7 +7,7 @@ body {
 
 .sidebar {
     width: 250px;
-    background: rgb(160,0,247);
+    background: rgb(160, 0, 247);
     color: white;
     padding: 20px;
     height: 100vh;
@@ -29,7 +29,8 @@ body {
 
 .main-content {
     flex: 1;
-    padding: 20px;
+    padding-top: 10px;
+    margin-top: 30px;
 }
 
 header {
@@ -37,6 +38,7 @@ header {
     justify-content: space-between;
     background: white;
     padding: 15px;
+    width: 90%;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -92,8 +94,8 @@ h2 {
     border-radius: 5px;
     border-bottom: 1px white solid;
 }
-.box:hover
-{
+
+.box:hover {
     transform: scale(1.1);
     box-shadow: 0 0 1px rgba(224, 218, 218, 0.3);
 }
@@ -110,6 +112,7 @@ header {
 
 .user-info {
     display: flex;
+    max-width: max-content;
     align-items: center;
 }
 
@@ -130,11 +133,25 @@ header {
     float: right;
 }
 
-.nav-link 
-{
-text-decoration: none;
-color: white;
-font-weight: bold;
-text-align: justify;
-margin-left:30px ;
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-align: justify;
+    margin-left: 30px;
+}
+
+.home-title {
+    margin-left: 45px;
+}
+
+.container {
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: white;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
