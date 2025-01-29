@@ -19,7 +19,7 @@ def read_word_document(request):
                 return JsonResponse(json.loads(json_data)) 
             except Exception as e:
                 content = f"Error reading document: {str(e)}"
-    return render(request, "home.html", {"form": form})
+    # return render(request, "home.html", {"form": form})
 
     return render(request, "home.html", {"content": content})
 def convert_docx_to_json(docx_path):
