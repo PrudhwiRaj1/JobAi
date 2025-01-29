@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import json
+from django.db import models
 from django.shortcuts import render
 from django.http import HttpResponse
 from docx import Document
@@ -44,3 +45,12 @@ def Forgot_pwd(request):
     return render(request,'forgot-password.html')
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+
+GENDER_CHOICES = [
+     ('null', 'not specified'),
+    ('Male', 'Male'),
+     ('Female', 'Female'),
+]
+class Resume(models.Model):
+    firstname="Prudhwi Raj"

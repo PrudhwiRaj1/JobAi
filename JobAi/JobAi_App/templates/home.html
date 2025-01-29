@@ -1,4 +1,5 @@
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,8 @@
     <title>JobAi | Dashboard</title>
     <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
-    <link rel="stylesheet" href="{%static 'assets/css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -19,25 +21,25 @@
         <hr class="divider">
         <ul>
             <div class="box">
-                <a href="{%url 'home'%}" class="nav-link"><li>Profile</li></a>
+               <a href="{%url 'home'%}" class="nav-link"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
             </div>
             <div class="box">
-                <a href="/Search-job" class="nav-link"><li>Search Job</li></a>
+                <a href="/Search-job" class="nav-link"><li><i class="fa-solid fa-search"></i> &emsp;Search Job</li></a>
             </div>
             <div class="box">
-                <a href="/Cover-Letters" class="nav-link"><li>Cover Letters</li></a>
+                <a href="/Cover-Letters" class="nav-link"><li><i class="fa-solid fa-envelope"></i> &emsp;Cover Letters</li></a>
             </div>
             <div class="box">
-                <a href="/Mock-Job-Interviews" class="nav-link"><li>Mock Job Interviews</li></a>
+                <a href="/Mock-Job-Interviews" class="nav-link"><li><i class="fa-solid fa-user"></i> &emsp;Mock Job Interviews</li></a>
             </div>
             <div class="box">
-                <a href="/Saved-jobs" class="nav-link"><li>Saved Jobs</li></a>
+                <a href="/Saved-jobs" class="nav-link"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
             </div>
             <div class="box">
-                <a href="/Auto-Apply" class="nav-link"><li>Auto Apply</li></a>
+                <a href="/Auto-Apply" class="nav-link"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
             </div>
             <div class="box">
-                <a href="/Settings" class="nav-link"><li>Settings</li></a>
+                <a href="/Settings" class="nav-link"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
             </div>
         </ul>
     </div>
@@ -51,7 +53,7 @@
             <nav>
             <div class="user-info">
                 <img src="{%static 'images/profile.jpeg'%}" alt="Profile Picture" class="profile-pic">
-                <span class="profile">Hello, User</span>
+                <span class="profile">Welcome, { firstname }</span>
             </div>
         </nav>
         </header>
@@ -78,3 +80,4 @@
 </body>
 
 </html>
+{% endblock %}
