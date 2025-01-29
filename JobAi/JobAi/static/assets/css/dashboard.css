@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    background: #f4f4f4;
+}
+
+.sidebar {
+    width: 250px;
+    background: #090213;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.stat-box {
+    background: white;
+    padding: 20px;
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.graph-section, .recommended-jobs {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.job {
+    padding: 10px;
+    background: #ececec;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+h2{ float: left;
+    margin-bottom: 30px;
+}
+.divider {
+    height: 1px;
+    background: white;
+    opacity: 0.7;
+    margin-top: 50px;
+    margin-right: 10px;
+    width: 268px;
+}
+.box{
+    padding-top: 25px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    border: 2px solid #5a2c91;
+    float: right;
+}
+
+.user-info span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    float: right;
+}

@@ -5,27 +5,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobAI | Upload Resume</title>
-    <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+    <title>JobAi | Dashboard</title>
     <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/css/dashboard.css'%}">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
 </head>
 
-<body style="background-image: url('../static/images/bg1.png')">
-    <div class="container" id="container1">
-        <h1>Upload and Read Word Document</h1>
-        <form method="POST" enctype="multipart/form-data" action="{% url 'read_word_document' %}">
-            {% csrf_token %}
-            <input type="file" name="word_file" accept=".doc,.docx" required>
-            <button type="submit">Upload and Read</button>
-        </form>
-
-        {% if content %}
-        <div class="content">
-            <h2>Document Content:</h2>
-            <p>{{ content }}</p>
-        </div>
-        {% endif %}
+<body>
+    
+    
+    <div class="sidebar">
+        <h2>JobAi</h2>
+        <hr class="divider container-block"><br>
+        <ul>
+            <div class="box">
+                <li>Profile</li>
+            </div>
+            <div class="box">
+                <li>Search Job</li>
+            </div>
+            <div class="box">
+                <li>Applications</li>
+            </div>
+            <div class="box">
+                <li>Messages</li>
+            </div>
+            <div class="box">
+                <li>Statistics</li>
+            </div>
+            <div class="box">
+                <li>News</li>
+            </div>
+        </ul>
     </div>
+    <div class="main-content">
+        <header>
+            <nav>
+            <div class="user-info">
+                <img src="{%static 'images/profile.jpeg'%}" alt="Profile Picture" class="profile-pic">
+                <span>Hello, User</span>
+            </div>
+        </nav>
+        </header>
+      
+    
+        <div class="container">
+            <h1>Upload and Read Word Document</h1>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'read_word_document' %}">
+                {% csrf_token %}
+                <input type="file" name="word_file" accept=".doc,.docx" required>
+                <button type="submit">Upload and Read</button>
+            </form>
+    
+            {% if content %}
+            <div class="content">
+                <h2>Document Content:</h2>
+                <p>{{ content }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </body>
+    
+    </html>
 </body>
 
 </html>
