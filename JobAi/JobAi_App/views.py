@@ -30,3 +30,5 @@ def Register(request):
     return render(request,'register.html')
 def Forgot_pwd(request):
     return render(request,'forgot-password.html')
+def dashboard(request):
+    return render(request, 'dashboard.html')
