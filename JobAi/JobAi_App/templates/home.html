@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="{% static 'assets/js/home.js'%}"></script>
+    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
 </head>
 
 <body>
@@ -22,25 +23,29 @@
         <hr class="divider">
         <ul>
             <div class="box active" onclick="select(this)">
-               <a href="{%url 'home'%}" class="nav-link"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
+               <a href="{%url 'home'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="{%url 'search-job' %}" class="nav-link"><li><i class="fa-solid fa-search"></i> &emsp;Search Job</li></a>
+                <a href="{%url 'search-job' %}" class="nav-link fw-bold"><li><i class="fa-solid fa-search"></i> &emsp;Search Job</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Cover-Letters" class="nav-link"><li><i class="fa-solid fa-envelope"></i> &emsp;Cover Letters</li></a>
+                <a href="#Cover-Letters" class="nav-link fw-bold"><li><i class="fa-solid fa-envelope"></i> &emsp;Cover Letters</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Mock-Job-Interviews" class="nav-link"><li><i class="fa-solid fa-user"></i> &emsp;Mock Job Interviews</li></a>
+                <a href="#Mock-Job-Interviews" class="nav-link fw-bold"><li><i class="fa-solid fa-user"></i> &emsp;Job Interview</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Saved-jobs" class="nav-link"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
+                <a href="#Saved-jobs" class="nav-link fw-bold"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Auto-Apply" class="nav-link"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
+                <a href="#Auto-Apply" class="nav-link fw-bold"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Settings" class="nav-link"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
+                <a href="#Settings" class="nav-link fw-bold"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
+            </div>
+            <div class="box" onclick="select(this)">
+                <a href="{%url 'login'%}" class="nav-link fw-bold"><li><i class="fas fa-sign-out-alt"></i> &emsp;Logout
+                </li></a>
             </div>
         </ul>
     </div>
