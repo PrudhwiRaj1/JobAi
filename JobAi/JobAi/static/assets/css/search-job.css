@@ -1,0 +1,43 @@
+.sub-content
+{
+    margin-right: 95px;
+
+}
+hr{
+    margin-right: 10px;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 25px;
+    padding: 8px 15px;
+    width: 500px;
+    border: 2px solid #ddd;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.search-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button i {
+    font-size: 18px;
+    color: #555;
+}
+#search-job
+{
+    margin-left: 50px;
+    font-size: 40px;
+    margin-bottom: 31px;
+}

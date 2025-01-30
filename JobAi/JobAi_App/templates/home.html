@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="{% static 'asstes/js/home.js'%}"></script>
+    <script src="{% static 'assets/js/home.js'%}"></script>
 </head>
 
 <body>
@@ -21,34 +21,34 @@
    <a href="{%url 'index' %}"><img src="{%static 'images/JobAi2.png'%}" alt="JobAi" height="50px" style="border-radius: 25px;"></a>
         <hr class="divider">
         <ul>
-            <div class="box" onclick="select(this)">
+            <div class="box active" onclick="select(this)">
                <a href="{%url 'home'%}" class="nav-link"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
             </div>
             <div class="box" onclick="select(this)">
                 <a href="{%url 'search-job' %}" class="nav-link"><li><i class="fa-solid fa-search"></i> &emsp;Search Job</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="../Cover-Letters" class="nav-link"><li><i class="fa-solid fa-envelope"></i> &emsp;Cover Letters</li></a>
+                <a href="#Cover-Letters" class="nav-link"><li><i class="fa-solid fa-envelope"></i> &emsp;Cover Letters</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="../Mock-Job-Interviews" class="nav-link"><li><i class="fa-solid fa-user"></i> &emsp;Mock Job Interviews</li></a>
+                <a href="#Mock-Job-Interviews" class="nav-link"><li><i class="fa-solid fa-user"></i> &emsp;Mock Job Interviews</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="../Saved-jobs" class="nav-link"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
+                <a href="#Saved-jobs" class="nav-link"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="../Auto-Apply" class="nav-link"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
+                <a href="#Auto-Apply" class="nav-link"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="../Settings" class="nav-link"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
+                <a href="#Settings" class="nav-link"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
             </div>
         </ul>
     </div>
+    
     <h1 class="home-title" id="profile">Profile</h1><br>
     <br>
     <div class="main-content">
-        <p> Profile is where you can manage your Resume and Personal Details.</p>
-    <hr><br>
+         <hr><br>
         <header>
             
             <nav>
@@ -78,7 +78,4 @@
     </body>
     
     </html>
-</body>
-
-</html>
 {% endblock %}
