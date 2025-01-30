@@ -46,11 +46,8 @@ def Forgot_pwd(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
+def search_job(request):
+    return render(request,'search-job.html')
 
-GENDER_CHOICES = [
-     ('null', 'not specified'),
-    ('Male', 'Male'),
-     ('Female', 'Female'),
-]
 class Resume(models.Model):
     firstname="Prudhwi Raj"

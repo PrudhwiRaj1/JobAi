@@ -44,38 +44,14 @@
             </div>
         </ul>
     </div>
-    <h1 class="home-title" id="profile">Profile</h1><br>
+    <h1 class="home-title" id="profile">Search Job</h1><br>
     <br>
     <div class="main-content">
-        <p> Profile is where you can manage your Resume and Personal Details.</p>
+        <p>You can Search Jobs Here.</p>
     <hr><br>
         <header>
             
-            <nav>
-            <div class="user-info">
-                <img src="{%static 'images/profile.jpeg'%}" alt="Profile Picture" class="profile-pic">
-                <span class="profile">Welcome, { firstname }</span>
-            </div>
-        </nav>
-        </header>
-      
-    
-        <div class="container">
-            <h1>Upload Resume in doc,docx format</h1>
-            <form method="POST" enctype="multipart/form-data" action="{% url 'read_word_document' %}">
-                {% csrf_token %}
-                <input type="file" name="word_file" accept=".doc,.docx" required>
-                <button type="submit">Upload and Submit</button>
-            </form>
-    
-            {% if content %}
-            <div class="content">
-                <h2>Document Content:</h2>
-                <p>{{ content }}</p>
-            </div>
-            {% endif %}
-        </div>
-    </body>
+        </body>
     
     </html>
 </body>
