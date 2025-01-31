@@ -50,4 +50,6 @@ def dashboard(request):
 def base(request):
     return render(request,'base.html')
 def search_job(request):
-    return render(request,'search-job.html')
+    firstname="User"
+    dictionary1={'fname':firstname}
+    return render(request,'search-job.html',dictionary1)

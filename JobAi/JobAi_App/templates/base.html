@@ -18,7 +18,7 @@
    <a href="{%url 'index' %}"><img src="{%static 'images/JobAi2.png'%}" alt="JobAi" height="50px" style="border-radius: 25px;"></a>
         <hr class="divider">
         <ul>
-            <div class="box active" onclick="select(this)">
+            <div class="box" onclick="select(this)">
                <a href="{%url 'home'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
             </div>
             <div class="box" onclick="select(this)">
@@ -45,7 +45,7 @@
             </div>
         </ul>
     </div>
-    {%block content%}
-    {%endblock%}        
+    {% block content %}
+    {% endblock %}        
     </body>
     </html>

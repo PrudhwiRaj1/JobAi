@@ -1,50 +1,6 @@
+{%extends 'base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobAi | Dashboard</title>
-    <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="{% static 'assets/js/home.js'%}"></script>
-    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
-</head>
-
-<body>    
-    <div class="sidebar">
-   <a href="{%url 'index' %}"><img src="{%static 'images/JobAi2.png'%}" alt="JobAi" height="50px" style="border-radius: 25px;"></a>
-        <hr class="divider">
-        <ul>
-            <div class="box active" onclick="select(this)">
-               <a href="{%url 'home'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="{%url 'search-job' %}" class="nav-link fw-bold"><li><i class="fa-solid fa-search"></i> &emsp;Search Job</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="#Cover-Letters" class="nav-link fw-bold"><li><i class="fa-solid fa-envelope"></i> &emsp;Cover Letters</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="#Mock-Job-Interviews" class="nav-link fw-bold"><li><i class="fa-solid fa-user"></i> &emsp;Job Interview</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="#Saved-jobs" class="nav-link fw-bold"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="#Auto-Apply" class="nav-link fw-bold"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="#Settings" class="nav-link fw-bold"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="{%url 'login'%}" class="nav-link fw-bold"><li><i class="fas fa-sign-out-alt"></i> &emsp;Logout
-                </li></a>
-            </div>
-        </ul>
-    </div>
+{%block content%}
 
     <div class="main-content">
             
@@ -66,6 +22,4 @@
             </div>
             {% endif %}
         </div>  
-        
-    </body>
-    </html>
+{%endblock%}
