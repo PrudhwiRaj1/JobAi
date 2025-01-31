@@ -8,7 +8,6 @@ hr{
 }
 .search-container {
     display: flex;
-    align-items: center;
     background: #fff;
     border-radius: 25px;
     padding: 8px 15px;
@@ -21,19 +20,23 @@ hr{
     border: none;
     outline: none;
     flex: 1;
-    padding: 8px;
+    padding-right: 80px;
     font-size: 16px;
+    
 }
 
 .search-container button {
-    background: none;
-    border: none;
+    background: #571bc7;
+    border-radius: 15px;
     cursor: pointer;
 }
-
+.search-container button:hover {
+  background: black;
+}
+  
 .search-container button i {
     font-size: 18px;
-    color: #555;
+    color: white;
 }
 #search-job
 {
