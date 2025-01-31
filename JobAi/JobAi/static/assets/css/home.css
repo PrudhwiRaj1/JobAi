@@ -97,7 +97,7 @@ h2 {
 .box {
     padding-top: 2px;
     border-radius: 5px;
-    margin-top: 25px;
+    margin-top: 15px;
     border-bottom: 1px white solid;
 }
 
@@ -160,7 +160,7 @@ input[type="file"] {
 
 button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: blue;
     color: white;
     border: none;
     border-radius: 5px;
@@ -200,28 +200,34 @@ button:hover {
 
 .container1 {
     background: white;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 1px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 700px;
+    width: 900px;
 }
 .input1, select {
-    width: 400px;
-    padding: 4px;
-    margin: 5px 0;
+    width: 350px;
+    margin: 3px 0;
     border: 1px solid #ccc;
     border-radius: 9px;
+    margin-left: 20px;
+    padding-left: 5px;
+}
+label{
+    margin-left: 25px;
 }
 .button1 {
     background: blue;
     color: white;
-    flex: 1;
-    padding: 10px;
     border: none;
-    width: 100%;
+    width: 300px;
     cursor: pointer;
     border-radius: 4px;
 }
 .button1:hover {
     background: darkblue;
+}
+textarea
+{
+    resize: none;
 }
