@@ -36,7 +36,9 @@ def convert_docx_to_json(docx_path):
 def login(request):
     return render(request,'login.html')
 def home(request):
-    return render(request,'home.html')
+    firstname="User"
+    dictionary1={'fname':firstname}
+    return render(request,'home.html',dictionary1)
 def main(request):
     return render(request,'index.html')
 def Register(request):
@@ -48,6 +50,3 @@ def dashboard(request):
 
 def search_job(request):
     return render(request,'search-job.html')
-
-class Resume(models.Model):
-    firstname="Prudhwi Raj"
