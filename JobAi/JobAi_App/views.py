@@ -47,6 +47,7 @@ def Forgot_pwd(request):
     return render(request,'forgot-password.html')
 def dashboard(request):
     return render(request, 'dashboard.html')
-
+def base(request):
+    return render(request,'base.html')
 def search_job(request):
     return render(request,'search-job.html')

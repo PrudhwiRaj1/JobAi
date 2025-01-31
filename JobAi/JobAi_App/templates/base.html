@@ -45,27 +45,7 @@
             </div>
         </ul>
     </div>
-
-    <div class="main-content">
-            
-    <h2 id="profile">Profile</h2><span style="float: right;" class="fw-bold mx-5"><img src="{%static 'images/profile.jpeg'%}" alt="" class="profile-pic1">Hi,{{ fname }}</span><br>
-        <br>    
-    
-        <div class="container w-75 mt-5" style="margin-right: 250px;margin-left: 25px;">
-            <h3 class="text-center">Upload Resume in doc,docx format</h3>
-            <form method="POST" enctype="multipart/form-data" action="{% url 'read_word_document' %}">
-                {% csrf_token %}
-                <input type="file" name="word_file" accept=".doc,.docx" required>
-                <button type="submit">Upload and Submit</button>
-            </form>
-    
-            {% if content %}
-            <div class="content">
-                <h2>Document Content:</h2>
-                <p>{{ content }}</p>
-            </div>
-            {% endif %}
-        </div>  
-        
+    {%block content%}
+    {%endblock%}        
     </body>
     </html>
