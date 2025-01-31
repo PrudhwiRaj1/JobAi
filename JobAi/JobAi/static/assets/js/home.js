@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const listItems = document.querySelectorAll("#menu li");
+  let savedTab = localStorage.getItem("activeTab");
+  if (savedTab) {
+      document.querySelector(`.box[href='${savedTab}']`)?.classList.add("active");
+  }
 
-  listItems.forEach(item => {
-      item.addEventListener("click", function () {
-          // Remove highlight from all items
-          listItems.forEach(li => li.classList.remove("highlight"));
-
-          // Add highlight to the clicked item
-          this.classList.add("highlight");
-      });
-    });
+  document.querySelectorAll(".box").forEach(link => {
+    link.addEventListener("click", function () {
+      document.querySelectorAll(".box").forEach(el => el.classList.remove("active"));
+      this.classList.add("active");
+      localStorage.setItem("activeTab", this.getAttribute("href"));
+    });
+  });
 });
+

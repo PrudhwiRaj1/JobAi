@@ -10,7 +10,7 @@ body {
     background: rgb(160, 0, 247);
     color: white;
     padding: 20px;
-    height: 100vh;
+    height: 145vh;
 }
 
 .sidebar h2 {
@@ -89,7 +89,7 @@ h2 {
     height: 1px;
     background: white;
     opacity: 0.7;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-right: 10px;
     width: 268px;
 }
@@ -97,6 +97,7 @@ h2 {
 .box {
     padding-top: 2px;
     border-radius: 5px;
+    margin-top: 25px;
     border-bottom: 1px white solid;
 }
 
@@ -141,7 +142,7 @@ header {
 }
 
 .active {
-    background-color: rgb(236, 175, 213);
+    background-color: rgb(160, 0, 247);
     color: white;
 }
 
@@ -187,11 +188,40 @@ button:hover {
 }
 
 .profile-pic1 {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 10px;
     object-fit: cover;
     border: 2px solid #5a2c91;
 
+}
+
+
+
+.container1 {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+}
+.input1, select {
+    width: 400px;
+    padding: 4px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+}
+.button1 {
+    background: blue;
+    color: white;
+    flex: 1;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.button1:hover {
+    background: darkblue;
 }
