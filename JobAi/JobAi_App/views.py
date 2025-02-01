@@ -1,10 +1,11 @@
 from django.shortcuts import render
+import os
 import json
 from django.db import models
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse, JsonResponse
 from docx import Document
-from django.http.response import JsonResponse
+from django.conf import settings
 
 def read_word_document(request):
     content = ""
@@ -12,25 +13,46 @@ def read_word_document(request):
         uploaded_file = request.FILES.get("word_file")
         if uploaded_file:
             try:
+                # Ensure media directories exist
+                documents_dir = os.path.join(settings.MEDIA_ROOT, "documents")
+                json_dir = os.path.join(settings.MEDIA_ROOT, "json")
+                os.makedirs(documents_dir, exist_ok=True)
+                os.makedirs(json_dir, exist_ok=True)
+                
+                # Save the uploaded file
+                fs = FileSystemStorage(location=documents_dir)
+                file_path = fs.save(uploaded_file.name, uploaded_file)
+                file_path = fs.path(file_path)
+                
                 # Read the Word document content
-                document = Document(uploaded_file)
+                document = Document(file_path)
                 paragraphs = [p.text for p in document.paragraphs if p.text.strip()]
                 content = "\n".join(paragraphs)
-                json_data = convert_docx_to_json(uploaded_file)
-                return JsonResponse(json.loads(json_data)) 
+                
+                # Convert document to JSON and save
+                json_data = convert_docx_to_json(file_path, uploaded_file.name)
+                return JsonResponse(json.loads(json_data))
             except Exception as e:
                 content = f"Error reading document: {str(e)}"
-    # return render(request, "home.html", {"form": form})
-
+    
     return render(request, "home.html", {"content": content})
-def convert_docx_to_json(docx_path):
-    """Convert a .docx file to JSON format"""
+
+def convert_docx_to_json(docx_path, filename):
+    """Convert a .docx file to JSON format and save it to media folder"""
     document = Document(docx_path)
     data = {"paragraphs": []}
 
     for para in document.paragraphs:
         data["paragraphs"].append(para.text)
-
+    
+    json_path = os.path.join(settings.MEDIA_ROOT, "json", filename + ".json")
+    
+    try:
+        with open(json_path, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+    except Exception as e:
+        print(f"Error saving JSON file: {e}")
+    
     return json.dumps(data, indent=4)
 # Create your views here.
 def login(request):
