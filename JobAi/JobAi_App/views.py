@@ -100,7 +100,7 @@ def convert_docx_to_json(docx_path, filename):
 def login(request):
     return render(request,'login.html')
 def home(request):
-    firstname="User"
+    firstname="Prudhwi"
     dictionary1={'fname':firstname}
     return render(request,'home.html',dictionary1)
 def main(request):
