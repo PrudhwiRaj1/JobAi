@@ -24,6 +24,7 @@
     </div>
     <div class="container1 mt-3" style="margin-left: 20px;">
         <form action="" method="POST" enctype="multipart/form-data" class="mt-5">
+            {% csrf_token %}
             <div class="row">
                 <!-- Left Column -->
                 <div class="col-md-6">
@@ -33,7 +34,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="fw-bold">Email:</label>
-                        <input type="email" class="input1" id="email" placeholder="ex: name@gmail.com">
+                        <input type="email" class="input1" id="email" placeholder="ex: name@gmail.com" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="fw-bold">Phone Number:</label><input type="text" id="phone"
@@ -50,6 +51,17 @@
                         <label for="dob" class="fw-bold">Date Of Birth</label><br>
                         <input type="date" id="dob" name="dob" class="input1"  required>
                     </div>
+                    <div class="mb-3">
+                        <label for="Education" class="fw-bold">Education Qualification</label><br>
+                        <select  id="Education" name="Education" class="input1" placeholder="Select your higher Qualification" required>
+                            <option value=""></option>
+                            <option value="MCA">MCA</option>
+                            <option value="Integrated MCA">Integrated MCA</option>
+                            <option value="Btech CSE">Btech CSE</option>
+                            <option value="Msc Computer Science">Msc Computer Science</option>
+                        </select>
+                    </div>
+
                     <div class="mb-3">
                         <label for="skills" class="fw-bold">Skills:</label><input type="text" id="skills" name="skills" class="input1" placeholder="Enter your Skills" required>
                     </div>
