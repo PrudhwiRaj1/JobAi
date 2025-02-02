@@ -27,10 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-RECAPTCHA_PUBLIC_KEY = '3LeIxAcWbbb123jllvFI1TnRWxMZNFuojJ4WifJWe'
-RECAPTCHA_PRIVATE_KEY = '2ghuiQwEFB5678BHG-GHJFDFDF23e'
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -136,3 +132,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# LOGIN & LOGOUT REDIRECTS
+LOGIN_REDIRECT_URL = "settings"
+LOGOUT_REDIRECT_URL = "home"

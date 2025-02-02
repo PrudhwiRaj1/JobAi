@@ -1,0 +1,61 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobAi|Settings</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+    </style>
+</head>
+<body class="{% if dark_mode %}dark-mode{% endif %}">
+<div class="main-content">
+    <h2 id="profile">Settings</h2>
+
+    <form method="POST" class="container1 mx-4" style="margin-top: 95px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label for="theme">Theme</label>
+        <select name="theme" id="theme" class="mx-4">
+            <option value="Light">Light(Default)</option>
+            <option value="Dark">Dark Default</option>
+        </select>
+        <label for="Change Username">Change Email(Optional)</label>
+        <input type="mail" id="mail" name="mail" class="input1" placeholder="example@gmail.com">
+        <label for="New Password"Change Password>New Password(Optional)</label>
+        <input type="password" name="password" id="password" class="input1">
+        <label for="Confirm Password"Change Password>Confirm Password(Optional)</label>
+        <input type="password" name="password" id="password" class="input1"> 
+        <button type="submit" class="m-5 ">Save Settings</button>
+    </form>
+   <div class="container mx-4 w-75">
+    <h3 class="fw-bold" style="margin-left: 25px;">Danger Zone</h3>
+    <form id="deleteAccountForm" action="" method="POST" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger fw-bold mx-5 mt-3 w-50">Delete Account</button>
+    </form>
+</div>
+    <script>
+        document.querySelector("[name='dark_mode']").addEventListener("change", function() {
+            document.body.classList.toggle("dark-mode", this.checked);
+            localStorage.setItem("dark-mode", this.checked);
+        });
+
+        document.addEventListener("submit", function() {
+            if (localStorage.getItem("dark-mode") === "true") {
+                document.body.classList.add("dark-mode");
+                document.querySelector("[name='dark_mode']").checked = true;
+            }
+        });
+    </script>
+</div>
+</body>
+{%endblock%}

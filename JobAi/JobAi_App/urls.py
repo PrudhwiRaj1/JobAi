@@ -9,6 +9,7 @@ urlpatterns = [
     path('upload/', read_word_document, name='read_word_document'),
     path('login/',views.login,name="login"),
     path('base/',views.base,name="base"),
+    path("settings/", views.settings, name="settings"),
     path('search-job/',views.search_job,name='search-job'),
     path('cover-letter/',views.coverletter,name='ai_cover_letter'),
     path('Register/',views.Register,name='Register'),

@@ -120,3 +120,5 @@ def search_job(request):
     return render(request,'search-job.html',username(request))
 def coverletter(request):
     return render(request,'cover-letter.html',username(request))
+def settings(request):
+    return render(request,'settings.html',username(request))

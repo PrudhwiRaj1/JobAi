@@ -39,7 +39,7 @@
                 <a href="#Auto-Apply" class="nav-link fw-bold"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Settings" class="nav-link fw-bold"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
+                <a href="{%url 'settings'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
             </div>
             <div class="box" onclick="select(this)">
                 <a href="#Support" class="nav-link fw-bold"><li><i class="fa-solid fa-comment"></i> &emsp;Support</li></a>
@@ -53,4 +53,11 @@
     {% block content %}
     {% endblock %}        
     </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("dark-mode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+        });
+    </script>
     </html>
