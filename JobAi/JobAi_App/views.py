@@ -97,6 +97,7 @@ def convert_docx_to_json(docx_path, filename):
     
     return json.dumps(data, indent=4)
 # Create your views here.
+
 def login(request):
     return render(request,'login.html')
 def username(request):
@@ -117,3 +118,5 @@ def base(request):
     return render(request,'base.html')
 def search_job(request):
     return render(request,'search-job.html',username(request))
+def coverletter(request):
+    return render(request,'cover-letter.html',username(request))

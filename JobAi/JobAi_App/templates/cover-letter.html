@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{%static 'assets/css/cover-letter.css'%}">
+</head>
+
+<body>
+
+    <div class="main-content">
+        <h2 id="cover-letter" class="mb-3">AI cover letter generator</h1>
+            <div class="" style="margin-top: 95px;">
+                <div class="cover-letter-generator coverletterbox w-100" style="position:relative;margin-bottom:50px">
+
+                    <div class="formcoverletter">
+                        <form class="formcover">
+                            <div class="coverletterformdiv">
+                                <div class="row">
+
+                                    <div class="col-lg-3">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Job
+                                                Title*</label><input required="" placeholder="Ex. software developer"
+                                                type="text" id="position" class="form-control" value=""></div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Your
+                                                Name*</label><input required="" placeholder="Ex. mehul" type="text"
+                                                id="name" class="form-control" value=""></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Applying for Company</label><input
+                                                required="" placeholder="Ex. google" type="text" id="Companyname"
+                                                class="form-control" value=""></div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Write
+                                                Cover Letter To*</label>
+                                            <input required="" placeholder="Ex-> Albert, Hr Manager, CEO" type="text"
+                                                id="hrname" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Your
+                                                Skills(use ',')</label><input placeholder="Ex. python,js,c++"
+                                                type="text" id="skills" class="form-control" value=""></div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Role
+                                                Type</label><input placeholder="Ex. fulltime, intership" type="text"
+                                                id="roletype" class="form-control" value=""></div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="coverletterinputblock"><label
+                                                class="coverletterlabel form-label">Job
+                                                Location</label><input placeholder="Ex. bangalore, remote etc"
+                                                type="text" id="location" class="form-control" value=""></div>
+                                    </div>
+                                </div>
+                                <div class="covergeneratorbutton"><button type="submit" class="mx-5 mt-3"><i
+                                            class="fa-solid fa-wand-magic-sparkles"></i> Generate Cover Letter</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+{% endblock %}
