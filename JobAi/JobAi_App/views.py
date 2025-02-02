@@ -99,10 +99,12 @@ def convert_docx_to_json(docx_path, filename):
 # Create your views here.
 def login(request):
     return render(request,'login.html')
-def home(request):
+def username(request):
     firstname="Prudhwi"
     dictionary1={'fname':firstname}
-    return render(request,'home.html',dictionary1)
+    return dictionary1
+def home(request):
+    return render(request,'home.html',username(request))
 def main(request):
     return render(request,'index.html')
 def Register(request):
@@ -114,6 +116,4 @@ def dashboard(request):
 def base(request):
     return render(request,'base.html')
 def search_job(request):
-    firstname="Prudhwi"
-    dictionary1={'fname':firstname}
-    return render(request,'search-job.html',dictionary1)
+    return render(request,'search-job.html',username(request))
