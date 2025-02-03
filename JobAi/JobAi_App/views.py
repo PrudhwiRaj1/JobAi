@@ -101,7 +101,7 @@ def convert_docx_to_json(docx_path, filename):
 def login(request):
     return render(request,'login.html')
 def username(request):
-    firstname="Prudhwi"
+    firstname="Prudhwi Raj"
     dictionary1={'fname':firstname}
     return dictionary1
 def home(request):
@@ -122,3 +122,5 @@ def coverletter(request):
     return render(request,'cover-letter.html',username(request))
 def settings_view(request):
     return render(request,'settings_view.html',username(request))
+def support(request):
+    return render(request,'support.html',username(request))

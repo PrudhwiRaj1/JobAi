@@ -1,0 +1,131 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<div class="main-content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{%static 'images/profile.jpeg'%}" class="rounded-circle" alt="Profile"
+                                height="50px" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div>
+                                <a href="{% url 'support' %}" class="nav-link fw-bold">
+                                    <li><i class="fa-solid fa-comment"></i> &emsp;Support</li>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{%url 'login'%}" class="nav-link fw-bold">
+                                    <li><i class="fas fa-sign-out-alt"></i> &emsp;Logout
+                                    </li>
+                                </a>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h4 id="profile">Frequently Asked Questions</h4>
+    <div class="container1 mt-4">
+        <div class="initial">
+            <div>
+                <div class="row main1">
+                    <div class=" col-10 mx-5 mt-4"><b>1. How does the AI job search work?</b>
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> The AI scans multiple job boards,
+                            matches job postings with your resume and preferences, and automatically applies on your
+                            behalf.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b>2. Is the platform really free? Are there any hidden
+                            charges?</b>
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> Yes, our core services are free.
+                            However, some advanced features may be available through premium plans.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b>3. How do I set up my profile for better job
+                            matches?</b>
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i>You can upload your resume, enter
+                            job preferences (industry, location, salary, etc.), and refine keywords to improve job
+                            matching.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b>4.Which job boards or websites does this AI apply
+                            to?</b>
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> The AI applies to major job boards
+                            like LinkedIn, Indeed, Glassdoor, and company career pages, depending on availability.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b>5. Is my personal data secure?</b>
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> Yes, we follow strict data security
+                            measures and do not share your information without your consent.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b> 6. How does auto-apply work?</b>
+
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> Once job preferences are set, the
+                            AI identifies suitable jobs and submits applications
+                            automatically.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b>7. Can I review applications before they are sent?
+                        </b>
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i>Yes, you can enable manual review
+                            before submission or let the AI auto-apply based on your
+                            preferences.</p>
+                    </div>
+                </div>
+
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b> 8. Can I set preferences for job applications (e.g.,
+                            salary, location, remote work)?</b>
+
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> Yes, you can customize preferences
+                            such as salary range, location, remote options, and job
+                            types.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b> 9. How many jobs can the AI apply to in a day?</b>
+
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> The AI can apply to a set number of
+                            jobs per day, depending on your plan and settings.</p>
+                    </div>
+                </div>
+
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b> 10. What if I want to stop auto-applying to jobs?</b>
+
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i> You can pause or deactivate the
+                            auto-apply feature anytime in your settings.</p>
+                    </div>
+                </div>
+                <div class="row main1">
+                    <div class="col-10 align-self-center mx-5"><b>11. How do I improve my resume for better job
+                            matches?</b>
+
+                        <p class="mobileQ"><i class="fas fa-chevron-right mr-2"></i>The AI provides suggestions to
+                            enhance your resume’s relevance for specific job roles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

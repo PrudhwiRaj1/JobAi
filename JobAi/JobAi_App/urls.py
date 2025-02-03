@@ -13,5 +13,6 @@ urlpatterns = [
     path('search-job/',views.search_job,name='search-job'),
     path('cover-letter/',views.coverletter,name='ai_cover_letter'),
     path('Register/',views.Register,name='Register'),
-    path('Forgot Password/',views.Forgot_pwd,name='Forgot Password')
+    path('Forgot Password/',views.Forgot_pwd,name='Forgot Password'),
+    path('user_support/',views.support,name='support')
 ]
