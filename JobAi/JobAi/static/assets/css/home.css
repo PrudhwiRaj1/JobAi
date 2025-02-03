@@ -10,7 +10,7 @@ body {
     background: rgb(160, 0, 247);
     color: white;
     padding: 20px;
-    height: 145vh;
+    height: 180vh;
 }
 
 .sidebar h2 {
@@ -229,4 +229,8 @@ label{
 textarea
 {
     resize: none;
+}
+.nav-item:hover
+{
+    background-color: rgba(0, 0, 0, 0.1);
 }

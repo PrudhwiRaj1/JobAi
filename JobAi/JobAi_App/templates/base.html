@@ -11,53 +11,76 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="{% static 'assets/js/home.js'%}"></script>
     <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
+    <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
 </head>
 
-<body>    
+<body>
     <div class="sidebar">
-   <a href="/"><img src="{%static 'images/JobAi2.png'%}" alt="JobAi" height="50px" style="border-radius: 25px;" class="mx-5"></a>
+        <a href="/"><img src="{%static 'images/JobAi2.png'%}" alt="JobAi" height="50px" style="border-radius: 25px;"
+                class="mx-5"></a>
         <hr class="divider">
-        <div class="fw-bold fs-5 mx-4"><img src="{%static 'images/profile.jpeg'%}" alt="profile-pic" class="profile-pic1 w-75 h-75 mx-3" style="margin-left: 12px;margin-right: 18px;"> <center>Welcome Back <br>{{ fname }}</center></div>
-        <hr class="divider"> 
+        <div class="fw-bold fs-5 mx-4"><img src="{%static 'images/profile.jpeg'%}" alt="profile-pic"
+                class="profile-pic1 w-75 h-75 mx-3" style="margin-left: 12px;margin-right: 18px;">
+            <center>Welcome Back <br>{{ fname }}</center>
+        </div>
+        <hr class="divider">
         <ul class="mt-4">
             <div class="box" onclick="select(this)">
-               <a href="{%url 'home'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-home"></i> &emsp;Profile</li></a>
+                <a href="{%url 'home'%}" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-home"></i> &emsp;Profile</li>
+                </a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="{%url 'search-job' %}" class="nav-link fw-bold"><li><i class="fa-solid fa-search"></i> &emsp;Search Job</li></a>
+                <a href="{%url 'search-job' %}" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-search"></i> &emsp;Search Job</li>
+                </a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="{%url 'ai_cover_letter'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-envelope"></i> &emsp;AI Cover Letter</li></a>
+                <a href="{%url 'ai_cover_letter'%}" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-envelope"></i> &emsp;AI Cover Letter</li>
+                </a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Mock-Job-Interviews" class="nav-link fw-bold"><li><i class="fa-solid fa-user"></i> &emsp;Job Interview</li></a>
+                <a href="#Mock-Job-Interviews" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-user"></i> &emsp;Job Interview</li>
+                </a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Saved-jobs" class="nav-link fw-bold"><li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li></a>
+                <a href="#Saved-jobs" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-floppy-disk"></i> &emsp;Saved Jobs</li>
+                </a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="#Auto-Apply" class="nav-link fw-bold"><li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li></a>
+                <a href="#Auto-Apply" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li>
+                </a>
             </div>
             <div class="box" onclick="select(this)">
-                <a href="{%url 'settings'%}" class="nav-link fw-bold"><li><i class="fa-solid fa-gear"></i> &emsp;Settings</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="#Support" class="nav-link fw-bold"><li><i class="fa-solid fa-comment"></i> &emsp;Support</li></a>
-            </div>
-            <div class="box" onclick="select(this)">
-                <a href="{%url 'login'%}" class="nav-link fw-bold"><li><i class="fas fa-sign-out-alt"></i> &emsp;Logout
-                </li></a>
+                <a href="{%url 'settings'%}" class="nav-link fw-bold">
+                    <li><i class="fa-solid fa-gear"></i> &emsp;Settings</li>
+                </a>
             </div>
         </ul>
+        <div class="sidebarFooter m-3 text-center">
+            <div class="sidebarFooterContent mb-3"><img src="{%static 'images/contact.png'%}" class="contact" width="200px">
+                <p class="contactMain mb-3 fw-bold">Contact Us <i class="fas fa-address-book"></i></p>
+                <div class="contactUs">
+                    <p>info@JobAi.com</p>
+                    <p>+91 9562766835</p>
+                </div>
+            </div>
+        </div>
+        <br><br>
     </div>
     {% block content %}
-    {% endblock %}        
-    </body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (localStorage.getItem("dark-mode") === "true") {
-                document.body.classList.add("dark-mode");
-            }
-        });
-    </script>
-    </html>
+    {% endblock %}
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("dark-mode") === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    });
+</script>
+
+</html>
