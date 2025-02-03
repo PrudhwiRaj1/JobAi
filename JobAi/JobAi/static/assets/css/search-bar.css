@@ -2225,7 +2225,7 @@ button {
 .join {
     display: inline-flex;
     align-items: stretch;
-    border-radius: var(--rounded-btn, .5rem)
+    /* border-radius: var(--rounded-btn, .5rem) */
 }
 
 .join :where(.join-item) {
