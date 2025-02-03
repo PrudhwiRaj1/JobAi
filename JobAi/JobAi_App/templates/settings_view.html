@@ -60,9 +60,10 @@
             {% csrf_token %}
             {{ form.as_p }}
             <label for="theme">Theme</label>
-            <select name="theme" id="change" class="mx-4 w-75">
+            <select name="theme" id="change" class="mx-4 w-75" required>
+                <option placeholder="Select Theme"></option>
                 <option value="Light">Light(Default)</option>
-                <option value="Dark">Dark Default</option>
+                <option value="Dark">Dark</option>
             </select>
             <label for="Change Username">Change Email(Optional)</label>
             <input type="mail" id="mail" name="mail" class="input1 w-75 mx-3" placeholder="example@gmail.com">
