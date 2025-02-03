@@ -124,3 +124,7 @@ def settings_view(request):
     return render(request,'settings_view.html',username(request))
 def support(request):
     return render(request,'support.html',username(request))
+def mockinterview(request):
+    return render(request,'mock-interview.html',username(request))
+def autoapply(request):
+    return render(request,'auto-apply.html',username(request))
