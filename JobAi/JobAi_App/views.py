@@ -7,13 +7,15 @@ from django.http import JsonResponse
 from docx import Document
 from django.conf import settings
 
-
 def extract_resume_details(content):
-    """Extracts key details like name, skills, address, date of birth, email, and phone number from the resume content."""
+    """Extracts key details like name, skills, address, highest qualification, job preference, university name, date of birth, email, and phone number from the resume content."""
     details = {
         "name": "",
         "skills": "",
         "address": "",
+        "highest qualification": "",
+        "job preference": "",
+        "university": "",
         "dob": "",
         "email": "",
         "phone": ""
@@ -21,28 +23,58 @@ def extract_resume_details(content):
     
     email_pattern = r"[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+"
     phone_pattern = r"\+?\d{10,15}"
-    dob_pattern = r"\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b"
-    skills_keywords = ["Python", "Java", "C++", "Django", "SQL", "Machine Learning", "AI", "React", "JavaScript"]
+    dob_pattern = r"\b(\d{1,2}[-/ ](?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*[-/ ]\d{2,4}|\d{1,2}[-/]\d{1,2}[-/]\d{2,4})\b"
+    qualification_keywords = ["Bachelor's Degree", "MCA","Master of Computer Application", "PhD", "B.Sc", "M.Sc", "B.Tech Computer Science", "M.Tech Computer Science", "MBA"]
+    job_preferences_keywords = ["Software Engineer", "Data Scientist", "Backend Developer", "Frontend Developer", "Project Manager"]
+    university_keywords = ["University", "Institute", "College"]
+    skills_keywords = ["Python", "Java", "C++", "Django", "SQL", "Machine Learning", "Artificial Intelligence", "React", "JavaScript"]
+    address_keywords = ["State", "Country", "District"]
+    indian_states = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"]
+    
+    resume_data = []  # Dictionary to store extracted details
     
     lines = content.split("\n")
     for line in lines:
         line = line.strip()
+        
         if not details["name"] and re.match(r"^[A-Z][a-z]+\s[A-Z][a-z]+", line):
             details["name"] = line
+        
         if not details["email"] and re.search(email_pattern, line):
             details["email"] = re.search(email_pattern, line).group()
+        
         if not details["phone"] and re.search(phone_pattern, line):
             details["phone"] = re.search(phone_pattern, line).group()
+        
         if not details["dob"] and re.search(dob_pattern, line):
             details["dob"] = re.search(dob_pattern, line).group()
-        if "address" in line.lower():
+        
+        if any(keyword.lower() in line.lower() for keyword in address_keywords) or any(state.lower() in line.lower() for state in indian_states):
             details["address"] = line
+        
+        for qualification in qualification_keywords:
+            if qualification.lower() in line.lower():
+                details["highest qualification"] = qualification
+                break
+                
+        for job in job_preferences_keywords:
+            if job.lower() in line.lower():
+                details["job preference"] = job
+                break
+                
+        for university in university_keywords:
+            if university.lower() in line.lower():
+                details["university"] = line
+                break
+                
         for skill in skills_keywords:
             if skill.lower() in line.lower():
                 details["skills"] += skill + ", "
     
     details["skills"] = details["skills"].rstrip(", ")
-    return details
+    resume_data.append(details)  # Storing extracted details in the list
+    
+    return details, resume_data
 
 def read_word_document(request):
     content = ""
