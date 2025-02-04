@@ -119,7 +119,7 @@ def read_word_document(request):
 
                  # Check if essential details are missing
                 if not extracted_details.get("name") or not extracted_details.get("email") or not extracted_details.get("phone"):
-                    alert_message = "*Failed to extract your resume.Please check your file and try again."
+                    alert_message = "*Failed to extract your resume.Check your file and try again."
                 else:
                     # Convert document to JSON and save
                     json_data = convert_docx_to_json(file_path, uploaded_file.name)
