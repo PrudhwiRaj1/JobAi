@@ -1,7 +1,51 @@
 {%extends 'base.html'%}
 {% load static %}
 {% block content %}
+<style>
+     .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
 
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 25px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 17px;
+            width: 17px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,6 +109,13 @@
                 <option value="Light">Light(Default)</option>
                 <option value="Dark">Dark</option>
             </select>
+            <div class="form-group"><label for="auto-apply">Auto-Apply Feature</label>
+            <label class="switch">
+                <input type="checkbox" id="toggleSwitch">
+                <span class="slider"></span>
+            </label>
+            <span id="status" class="fw-bold mx-5">(Auto-Apply Feature is Disabled)</span>
+        </div>
             <label for="Change Username">Change Email(Optional)</label>
             <input type="mail" id="mail" name="mail" class="input1 w-75 mx-3" placeholder="example@gmail.com">
             <label for="New Password">New Password(Optional)</label>
@@ -101,6 +152,22 @@
                     eye.classList.add("fa-eye");
                 }
             }
+            const toggleSwitch = document.getElementById("toggleSwitch");
+    const statusText = document.getElementById("status");
+
+    toggleSwitch.addEventListener("change", function() {
+        if (this.checked) {
+            statusText.innerText = "(Auto-Apply Feature is Enabled)";
+            // Add your turn-on functionality here
+            statusText.style.color = "green"; // Change text color to green
+
+        } else {
+            statusText.innerText = "(Auto-Apply Feature is Disabled)";
+            // Add your turn-off functionality here
+            statusText.style.color = "black"; // Change text color to black
+
+        }
+    });
         </script>
     </div>
 </body>
