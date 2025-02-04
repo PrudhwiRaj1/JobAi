@@ -1,5 +1,20 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
+class ResumeDetails(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    dob = models.CharField(max_length=50, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    highest_qualification = models.CharField(max_length=255, blank=True, null=True)
+    job_preference = models.CharField(max_length=255, blank=True, null=True)
+    university = models.CharField(max_length=255, blank=True, null=True)
+    skills = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name if self.name else "Unknown Resume"
+
 
 class UserSettings(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="settings")

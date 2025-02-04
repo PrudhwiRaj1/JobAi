@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from docx import Document
 from django.conf import settings
+from .models import ResumeDetails
 
 def extract_resume_details(content):
     """Extracts key details like name, skills, address, highest qualification, job preference, university name, date of birth, email, and phone number from the resume content."""
@@ -31,7 +32,7 @@ def extract_resume_details(content):
     address_keywords = ["State", "Country", "District"]
     indian_states = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"]
     
-    resume_data = []  # Dictionary to store extracted details
+    resume_data = {} # Dictionary to store extracted details
     
     lines = content.split("\n")
     for line in lines:
@@ -72,12 +73,13 @@ def extract_resume_details(content):
                 details["skills"] += skill + ", "
     
     details["skills"] = details["skills"].rstrip(", ")
-    resume_data.append(details)  # Storing extracted details in the list
+    resume_data.update(details)  # Storing extracted details in the list
     
-    return details, resume_data
+    return details
 
 def read_word_document(request):
     content = ""
+    resume_details=None
     if request.method == "POST":
         uploaded_file = request.FILES.get("word_file")
         if uploaded_file:
@@ -104,12 +106,13 @@ def read_word_document(request):
                 # Extract resume details
                 extracted_details = extract_resume_details(content)
                 
+                # resume_details = ResumeDetails.objects.create(**extracted_details)
                 # Convert document to JSON and save
                 json_data = convert_docx_to_json(file_path, uploaded_file.name)
-                return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
+                # return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
             except Exception as e:
                 return JsonResponse({"error": f"Error reading document: {str(e)}"}, status=500)
-    return render(request, "home.html", {"content": content,"resume_details": extracted_details})
+    return render(request, "home.html", {"resume_details": extracted_details})
 
 def convert_docx_to_json(docx_path, filename):
     """Convert a .docx file to JSON format and save it to media folder"""

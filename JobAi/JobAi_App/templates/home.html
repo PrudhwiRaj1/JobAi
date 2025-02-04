@@ -39,7 +39,7 @@
 
     <div class="container w-50 mt-4" style="margin-right: 250px;margin-left: 25px;">
         <h4 class="text-center">Upload Resume in doc,docx format</h4>
-        <form method="POST" id="uploadForm" enctype="multipart/form-data" action="{% url 'read_word_document' %}">
+        <form method="POST" id="uploadForm" enctype="multipart/form-data" action="../read_word_document/">
             {% csrf_token %}
 
             <input type="file" id="fileInput" name="word_file" accept=".doc,.docx" required>
@@ -61,26 +61,26 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name" class="fw-bold">Full Name:</label><input type="text" id="name" name="name"
-                            class="input1" placeholder="Enter your full name" required>
+                            class="input1" placeholder="Enter your full name" value="{{ resume_details.name }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="fw-bold">Email:</label>
-                        <input type="email" class="input1" id="email" placeholder="ex: name@gmail.com" required>
+                        <input type="email" class="input1" id="email" placeholder="ex: name@gmail.com" value="{{ resume_details.email }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="fw-bold">Phone Number:</label><input type="text" id="phone"
-                            name="phone" class="input1" placeholder="Enter your Phone Number(+91)" required>
+                            name="phone" class="input1" placeholder="Enter your Phone Number(+91)" value="{{ resume_details.phone }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="Address" class="fw-bold">Address:</label><textarea id="Address" name="Address"
-                            class="input1" placeholder="Enter your Address" required rows="5" cols="5"></textarea>
+                            class="input1" placeholder="Enter your Address" required rows="5" cols="5" value="{{ resume_details.address }}"></textarea>
                     </div>
                 </div>
                 <!-- right column -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="dob" class="fw-bold">Date Of Birth</label><br>
-                        <input type="date" id="dob" name="dob" class="input1" required>
+                        <input type="date" id="dob" name="dob" class="input1" value="{{ resume_details.dob }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="Education" class="fw-bold">Education Qualification</label><br>
@@ -96,7 +96,7 @@
 
                     <div class="mb-3">
                         <label for="skills" class="fw-bold">Skills:</label><input type="text" id="skills" name="skills"
-                            class="input1" placeholder="Enter your Skills" required>
+                            class="input1" placeholder="Enter your Skills" value="{{resume_details.skills}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="job preferences" class="fw-bold">Job Preference(Only one):</label><select
@@ -124,4 +124,5 @@
             </div>
         </form>
     </div>
+    <p value="{{resume_details}}">{{resume_details}}</p>
     {%endblock%}
