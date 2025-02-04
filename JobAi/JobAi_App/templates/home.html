@@ -44,7 +44,9 @@
 
             <input type="file" id="fileInput" name="word_file" accept=".doc,.docx" required>
             <button type="submit" id="submit">Upload and Submit</button>
+            
         </form>
+<input class="text-danger text-center mx-1 border-light border-0 w-100" value="{{alert_message}}">
 
         <!-- {% if content %}
             <div class="content">
@@ -54,6 +56,10 @@
             {% endif %} -->
     </div>
     <div class="container1 mt-3" style="margin-left: 20px;">
+        <button onclick="toggleEditable()" id="edit" class="float-end bg-success hover-bg-dark">
+            <i class="fa fa-edit float-end mx-4 mt-2 fs-5"></i>
+            <b class="float-end mt-2">Edit</b>
+        </button>
         <form action="" method="POST" enctype="multipart/form-data" class="mt-5">
             {% csrf_token %}
             <div class="row">
@@ -61,60 +67,52 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name" class="fw-bold">Full Name:</label><input type="text" id="name" name="name"
-                            class="input1" placeholder="Enter your full name" value="{{ resume_details.name }}" required>
+                            class="input1 input-bg toggleInput" placeholder="Enter your full name" value="{{ resume_details.name }}" required
+                            readonly="">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="fw-bold">Email:</label>
-                        <input type="email" class="input1" id="email" placeholder="ex: name@gmail.com" value="{{ resume_details.email }}" required>
+                        <input type="email" class="input1 input-bg toggleInput" id="email" placeholder="ex: name@gmail.com"
+                            value="{{ resume_details.email }}" required readonly>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="fw-bold">Phone Number:</label><input type="text" id="phone"
-                            name="phone" class="input1" placeholder="Enter your Phone Number(+91)" value="{{ resume_details.phone }}" required>
+                            name="phone" class="input1 input-bg toggleInput" placeholder="Enter your Phone Number(+91)"
+                            value="{{ resume_details.phone }}" required readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="Address" class="fw-bold">Address:</label><textarea id="Address" name="Address"
-                            class="input1" placeholder="Enter your Address" required rows="5" cols="5" value="{{ resume_details.address }}"></textarea>
+                        <label for="Address" class="fw-bold">Address:</label><input id="Address" name="Address"
+                            class="input1 input-bg toggleInput" placeholder="Enter your Address" required rows="5" cols="5"
+                            value="{{ resume_details.address }}" readonly></textarea>
                     </div>
                 </div>
                 <!-- right column -->
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="dob" class="fw-bold">Date Of Birth</label><br>
-                        <input type="date" id="dob" name="dob" class="input1" value="{{ resume_details.dob }}" required>
+                        <input type="text" id="dob" name="dob" class="input1 input-bg toggleInput" placeholder="Enter Date of Birth" value="{{ resume_details.dob }}" readonly
+                            required>
                     </div>
                     <div class="mb-3">
                         <label for="Education" class="fw-bold">Education Qualification</label><br>
-                        <select id="Education" name="Education" class="input1"
-                            placeholder="Select your higher Qualification" required>
-                            <option value=""></option>
-                            <option value="MCA">MCA</option>
-                            <option value="Integrated MCA">Integrated MCA</option>
-                            <option value="Btech CSE">Btech CSE</option>
-                            <option value="Msc Computer Science">Msc Computer Science</option>
-                        </select>
+                        <input type="text" name="Education" id="Education" class="input1 input-bg toggleInput"
+                            placeholder="Enter your Highest Qualification"
+                            value="{{ resume_details.highest_qualification }}" readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="skills" class="fw-bold">Skills:</label><input type="text" id="skills" name="skills"
-                            class="input1" placeholder="Enter your Skills" value="{{resume_details.skills}}" required>
+                            class="input1 input-bg toggleInput" placeholder="Enter your Skills" value="{{resume_details.skills}}" required
+                            readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="job preferences" class="fw-bold">Job Preference(Only one):</label><select
-                            type="text" id="jobPreference" name="jobPreference" class="input1" required>
-                            <option></option>
-                            <option value="Python developer">Python Developer</option>
-                            <option value="Java developer">Java Developer</option>
-                            <option value=".Net Developer">.Net Developer</option>
-                            <option value="Django Developer">Django Developer</option>
-                            <option value="Mern Stack Developer">Mern Stack Developer</option>
-                            <option value="CyberSecurity Jobs">CyberSecurity Jobs</option>
-                            <option value="Fullstack Developer">Fullstack Developer</option>
-                            <option value="Database Administration">Database Administration</option>
-                        </select>
+                        <label for="job preferences" class="fw-bold">Job Preference(Only one):</label><input type="text"
+                            name="job_preferences" class="input1 input-bg toggleInput" placeholder="Enter your highest Job Preference"
+                            value="{{ resume_details.job_preference }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="preferences" class="fw-bold">Job Location Preferences:</label><input type="text"
-                            id="Preference" name="Preference" class="input1"
+                            id="Preference" name="Preference" class="input1 input-bg toggleInput"
                             placeholder="Enter your preferred Job Location" required>
                     </div>
 
@@ -124,5 +122,14 @@
             </div>
         </form>
     </div>
-    <p value="{{resume_details}}">{{resume_details}}</p>
+    <script>
+    function toggleEditable() {
+    let input = document.getElementById("toggleInput");
+    if (input.hasAttribute("readonly")) {
+      input.removeAttribute("readonly");
+    } else {
+      input.setAttribute("readonly", true);
+    }
+  }
+    </script>
     {%endblock%}

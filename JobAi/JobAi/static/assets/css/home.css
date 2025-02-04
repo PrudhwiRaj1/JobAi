@@ -230,7 +230,14 @@ textarea
 {
     resize: none;
 }
-.nav-item:hover
+.nav-item:hover,#edit:hover
 {
     background-color: rgba(0, 0, 0, 0.1);
 }
+.input-bg:read-only{
+    background-color: #ccc9c9; /* Light gray when readonly */
+  }
+  .hover-bg-dark:hover {
+    background-color: #343a40 !important; /* Dark background on hover */
+    color: white; /* Optional: Change text color */
+  }
