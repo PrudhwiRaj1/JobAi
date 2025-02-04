@@ -1,0 +1,44 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JobAi | User Type</title>
+  <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link href="{%static 'assets/css/bootstrap.min.css'%}"
+    rel="stylesheet"/>
+    <link rel="stylesheet" href="{%static 'assets/css/index.css'%}">
+  <link href="{%static 'assets/css/bootstrap.min.css'%}" rel="stylesheet">
+<link rel="stylesheet" href="{%static 'assets/css/user-type.css'%}">
+</head>
+<body
+	class="grid grid-cols-[1fr_1rem_repeat(2,min(37.5rem,calc(50%-1rem)))_1rem_1fr] bg-top bg-no-repeat [background-size:200vw] lg:[background-size:100%_62rem] [:where(&>*)]:[grid-column:3/5]"
+	style="background-image: url('../static/images/bg1.png');">
+    <a href="{% url 'index'%}"> <img src="{% static 'images/JobAi2.png'%}" alt="logo" class="logo mt-4"
+        style="margin-left: 85px;height: 90px;border-radius: 25px;"></a>
+        <div class="float-end mt-4">
+			<ul class="menu menu-horizontal gap-0 max-sm:p-0 text-xs lg:text-sm nav-item">
+				<li class="nav-link"> <a href="{%url 'index'%}" class="fw-bold fs-5 text-white hover:bg-black flex items-center text-lg text-decoration-none" style="margin-right: 290px;">Home</a></li>
+			</ul>
+		</div>
+
+<div class="container row mt-5" style="margin-left: 85px;">
+  <!-- Left Side: User Selection -->
+  <div class="col-md-6 left-content d-flex flex-column justify-content-center">
+      <h2 class="text-center mb-4">Choose Your Role</h2>
+      <!-- <button class="btn btn-primary btn-custom mb-3" onclick="redirectTo('admin')">Admin</button> -->
+     <a href="#company_Login/"> <button class="btn btn-success btn-custom mb-3" onclick="redirectTo('Company')">Company</button></a>
+     <a href="{%url 'login'%}"> <button class="btn btn-warning btn-custom mb-3" onclick="redirectTo('Job Seeker')">Job Seeker</button></a>
+  </div>
+
+  <!-- Right Side: Image -->
+  <div class="col-md-6 right-image d-none d-md-block">
+      <img src="{%static 'images/login1.jpg'%}" alt="Choose Role">
+  </div>
+</div>
+
+
+</body>
+</html>

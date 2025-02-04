@@ -126,7 +126,7 @@ def read_word_document(request):
                 # return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
             except Exception as e:
                 return JsonResponse({"error": f"Error reading document: {str(e)}"}, status=500)
-    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message})
+    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message,"fname":dictionary1})
 
 
 def convert_docx_to_json(docx_path, filename):
@@ -160,6 +160,8 @@ def home(request):
 def main(request):
     return render(request, 'index.html')
 
+def base(request):
+    return render(request,'base.html')
 
 def Register(request):
     return render(request, 'register.html')
@@ -199,3 +201,6 @@ def mockinterview(request):
 
 def autoapply(request):
     return render(request, 'auto-apply.html', username(request))
+
+def user_type(request):
+    return render(request,'user-type.html')

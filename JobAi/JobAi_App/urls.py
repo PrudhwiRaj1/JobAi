@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import read_word_document
+from ctypes.test.test_pickling import name
 
 urlpatterns = [
   
@@ -9,6 +10,7 @@ urlpatterns = [
     path('read_word_document/', read_word_document, name='read_word_document'),
     path('login/',views.login,name="login"),
     path('base/',views.base,name="base"),
+    path('user-type/',views.user_type,name="user-type"),
     path("settings/", views.settings_view, name="settings_view"),
     path('search-job/',views.search_job,name='search-job'),
     path('cover-letter/',views.coverletter,name='ai_cover_letter'),
