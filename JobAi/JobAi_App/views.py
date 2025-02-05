@@ -86,7 +86,7 @@ def extract_resume_details(content):
 
 
 def read_word_document(request):
-    dictionary1=username(request)
+    d=username(request)
     content = ""
     alert_message=""
     resume_details = None
@@ -126,7 +126,7 @@ def read_word_document(request):
                 # return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
             except Exception as e:
                 return JsonResponse({"error": f"Error reading document: {str(e)}"}, status=500)
-    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message,"fname":dictionary1})
+    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message,"fname":d})
 
 
 def convert_docx_to_json(docx_path, filename):
@@ -164,7 +164,7 @@ def base(request):
     return render(request,'base.html')
 
 def Register(request):
-    return render(request, 'register.html')
+    return render(request, 'jobseeker_register.html')
 
 
 def Forgot_pwd(request):
@@ -205,5 +205,9 @@ def autoapply(request):
 def user_type(request):
     return render(request,'user-type.html')
 
-def companylogin(request):
+def company_login(request):
     return render(request,'company_login.html')
+def company_registration(request):
+    return render(request,'company_registration.html')
+def company_forgot_password(request):
+    return render(request,'company_forgot_pwd.html')
