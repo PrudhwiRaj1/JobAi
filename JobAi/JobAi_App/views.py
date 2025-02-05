@@ -86,7 +86,6 @@ def extract_resume_details(content):
 
 
 def read_word_document(request):
-    d=username(request)
     content = ""
     alert_message=""
     resume_details = None
@@ -126,7 +125,7 @@ def read_word_document(request):
                 # return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
             except Exception as e:
                 return JsonResponse({"error": f"Error reading document: {str(e)}"}, status=500)
-    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message,"fname":d})
+    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message,"fname":username(request)})
 
 
 def convert_docx_to_json(docx_path, filename):

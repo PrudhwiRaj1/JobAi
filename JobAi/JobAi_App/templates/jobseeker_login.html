@@ -20,8 +20,11 @@
      
       <div class="brand-wrapper">
         <a href="{%url 'user-type'%}" class="nav-link">
-          <h6 class="text-white fw-bolder fs-5" style="text-decoration: none;"><img src="{%static 'images/back.png'%}" alt="back" style="filter:invert(50%)"></h6><br>
-         </a>
+          <h6 class="text-white fw-bolder fs-5" style="text-decoration: none;"><img src="{%static 'images/back.png'%}"
+              alt="back"
+              style="filter:invert(50%);margin-top:0px;height: 35px;border: solid rgb(65, 63, 63);border-radius: 5px;">
+          </h6><br>
+        </a>
         <a href="{% url 'index'%}"> <img src="{% static 'images/JobAi2.png'%}" alt="logo" class="logo"
             style="height: 90px;border-radius: 25px;box-shadow: 0 0 20px rgb(48, 35, 229);"></a>
         <h4 class="fw-bold mt-2 login-title">Welcome to JobAi</h4>
@@ -47,7 +50,7 @@
           <button name="login" id="login" class="btn btn-block btn-primary w-100">Login</button>
         </form>
         <a href="{%url 'Forgot Password'%}" class="forgot-password-link mb-2 mt-2">Forgot password?</a>
-        <p class="login-wrapper-footer-text mb-0">Don't have an account? <a href="{%url 'Register'%}"
+        <p class="login-wrapper-footer-text">Don't have an account? <a href="{%url 'Register'%}"
             class="text-reset">Register here</a></p>
       </div>
     </div>
