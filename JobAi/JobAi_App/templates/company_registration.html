@@ -31,11 +31,11 @@
           </div>
           <h4>Company Registration</h4>
           <div class="login-wrapper my-auto">
-            <form method="post">
+            <form action="{%url 'company_registration'%}" method="POST">
               {% csrf_token %}
               <div class="form-group mb-1">
-                <label for="Username">Name</label>
-                <input type="text" name="Username" id="Username" class="form-control" placeholder="Enter Username"
+                <label for="Username">Company Name</label>
+                <input type="text" name="Username" id="Username" class="form-control" placeholder="Enter Company Name"
                   required>
               </div>
               <div class="form-group mb-1">

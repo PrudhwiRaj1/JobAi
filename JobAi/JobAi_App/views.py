@@ -1,5 +1,5 @@
 from operator import contains
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import os
 import re
 import json
@@ -7,8 +7,8 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from docx import Document
 from django.conf import settings
-from .models import ResumeDetails
-
+from .models import *
+from django.contrib import messages
 
 def username(request):
     firstname = "Prudhwi Raj"
@@ -205,8 +205,29 @@ def user_type(request):
     return render(request,'user-type.html')
 
 def company_login(request):
+    if request.method=="POST":
+        Email=request.POST.get("email")
+        Password=request.POST.get("password")
+        name=Company.objects.get(email=Email,password=Password)
     return render(request,'company_login.html')
 def company_registration(request):
-    return render(request,'company_registration.html')
+        if request.method == "POST":
+           name=request.POST.get('Username')
+           email=request.POST.get('email')
+           password=request.POST.get('password')
+           company_type=request.POST.get('CompanyType')
+           company_address=request.POST.get('Address')
+           companyobj=Company()
+           companyobj.name=name
+           companyobj.password=password
+           companyobj.email=email
+           companyobj.companytype=company_type
+           companyobj.address=company_address
+           companyobj.save()
+           return render(request,'company_registration.html')
+        return render(request,'company_registration.html')
+
 def company_forgot_password(request):
     return render(request,'company_forgot_pwd.html')
+def company_dashboard(request):
+    return render(request,'company_dashboard.html')

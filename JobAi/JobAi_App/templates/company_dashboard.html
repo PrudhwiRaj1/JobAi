@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Right-Side Dashboard Panel -->
+        <div class="col-lg-9">
+            <div class="card shadow-lg p-4 border-0 rounded-4" style="background: linear-gradient(135deg, #ffffff, #f8f9fa);">
+                
+                <!-- Company Profile Section -->
+                <div class="d-flex align-items-center mb-4">
+                    <img src="{{ company.logo.url }}" alt="Company Logo" class="rounded-circle border shadow-sm" width="90" height="90">
+                    <div class="ms-3">
+                        <h3 class="fw-bold text-dark">{{ company.name }}</h3>
+                        <p class="text-muted">{{ company.industry }} | Established: {{ company.founded_year }}</p>
+                        <span class="badge bg-warning text-dark"><i class="bi bi-star-fill"></i> {{ company.rating|default:"4.5" }}/5</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="d-flex gap-3 mb-4">
+                    <a href="#" class="btn btn-primary shadow-sm fw-bold"><i class="bi bi-plus-circle"></i> Post a Job</a>
+                    <a href="#" class="btn btn-outline-secondary shadow-sm fw-bold"><i class="bi bi-pencil-square"></i> Edit Profile</a>
+                    <a href="#" class="btn btn-info shadow-sm fw-bold"><i class="bi bi-bar-chart-line-fill"></i> View Analytics</a>
+                </div>
+
+                <!-- Job Listings -->
+                <h4 class="fw-bold text-dark">Your Job Postings</h4>
+                {% for job in jobs %}
+                <div class="card mb-3 p-3 shadow-sm border-0 rounded-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="fw-bold text-primary">{{ job.title }}</h6>
+                            <p class="text-muted mb-1"><i class="bi bi-geo-alt"></i> {{ job.location }} | <i class="bi bi-briefcase"></i> {{ job.job_type }}</p>
+                            <small class="text-muted"><i class="bi bi-calendar-check"></i> Posted on: {{ job.posted_at|date:"M d, Y" }}</small>
+                        </div>
+                        <div>
+                            <span class="badge bg-{% if job.is_active %}success{% else %}danger{% endif %}">
+                                {% if job.is_active %}Active{% else %}Closed{% endif %}
+                            </span>
+                            <a href="#" class="btn btn-sm btn-outline-info shadow-sm"><i class="bi bi-eye"></i> View Applications</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted text-center">No job postings yet.</p>
+                {% endfor %}
+
+                <!-- Dashboard Analytics -->
+                <h4 class="fw-bold text-dark mt-4">Dashboard Insights</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card p-3 text-center shadow-sm border-0 rounded-4" style="background: #e3f2fd;">
+                            <i class="bi bi-briefcase-fill text-primary fs-3"></i>
+                            <h5 class="fw-bold mt-2 text-primary">{{ total_jobs }}</h5>
+                            <p class="text-muted">Total Jobs Posted</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3 text-center shadow-sm border-0 rounded-4" style="background: #d4edda;">
+                            <i class="bi bi-people-fill text-success fs-3"></i>
+                            <h5 class="fw-bold mt-2 text-success">{{ total_applications }}</h5>
+                            <p class="text-muted">Total Applications</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3 text-center shadow-sm border-0 rounded-4" style="background: #fff3cd;">
+                            <i class="bi bi-eye-fill text-warning fs-3"></i>
+                            <h5 class="fw-bold mt-2 text-warning">{{ profile_views }}</h5>
+                            <p class="text-muted">Profile Views</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <h4 class="fw-bold text-dark mt-4">Recent Applications</h4>
+                <ul class="list-group">
+                    {% for app in recent_applications %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm rounded-4 border-0 mb-2">
+                        <div>
+                            <h6 class="fw-bold">{{ app.candidate.name }}</h6>
+                            <p class="text-muted mb-1"><i class="bi bi-envelope"></i> {{ app.candidate.email }}</p>
+                        </div>
+                        <span class="badge bg-info">{{ app.status }}</span>
+                    </li>
+                    {% empty %}
+                    <p class="text-muted text-center">No recent applications.</p>
+                    {% endfor %}
+                </ul>
+
+                <!-- Upcoming Job Expiry Alerts -->
+                <h4 class="fw-bold text-dark mt-4">Expiring Job Posts</h4>
+                <ul class="list-group">
+                    {% for job in expiring_jobs %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm rounded-4 border-0 mb-2">
+                        <div>
+                            <h6 class="fw-bold">{{ job.title }}</h6>
+                            <p class="text-muted mb-1"><i class="bi bi-clock"></i> Expires on: {{ job.expiry_date|date:"M d, Y" }}</p>
+                        </div>
+                        <span class="badge bg-danger">Expiring Soon</span>
+                    </li>
+                    {% empty %}
+                    <p class="text-muted text-center">No expiring jobs.</p>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
