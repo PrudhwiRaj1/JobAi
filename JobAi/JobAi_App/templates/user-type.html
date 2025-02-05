@@ -29,13 +29,13 @@
   <div class="col-md-6 left-content d-flex flex-column justify-content-center">
       <h2 class="text-center mb-4">Choose Your Role</h2>
       <!-- <button class="btn btn-primary btn-custom mb-3" onclick="redirectTo('admin')">Admin</button> -->
-     <a href="#company_Login/"> <button class="btn btn-success btn-custom mb-3" onclick="redirectTo('Company')">Company</button></a>
-     <a href="{%url 'login'%}"> <button class="btn btn-warning btn-custom mb-3" onclick="redirectTo('Job Seeker')">Job Seeker</button></a>
+     <a href="{% url 'company_login' %}/"> <button class="btn btn-success btn-custom text-white mb-3" onclick="redirectTo('Company')">Company</button></a>
+     <a href="{% url 'jobseeker_login'%}"> <button class="btn btn-primary btn-custom text-white mb-3" onclick="redirectTo('Job Seeker')">Job Seeker</button></a>
   </div>
 
   <!-- Right Side: Image -->
   <div class="col-md-6 right-image d-none d-md-block">
-      <img src="{%static 'images/login1.jpg'%}" alt="Choose Role">
+      <img src="{%static 'images/user-type.avif'%}" alt="Choose Role">
   </div>
 </div>
 

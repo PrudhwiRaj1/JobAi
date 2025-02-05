@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JobAi | Login</title>
+  <title>JobAi| Jobseeker Login</title>
   <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
@@ -38,15 +38,15 @@
                 <label for="Show Password">Show Password</label>
 
               </div>
-              <button name="login" id="login" class="btn btn-block btn-primary">Login</button>
+              <button name="login" id="login" class="btn btn-block btn-primary w-100">Login</button>
             </form>
             <a href="{%url 'Forgot Password'%}" class="forgot-password-link mb-2 mt-3">Forgot password?</a>
             <p class="login-wrapper-footer-text mb-0">Don't have an account? <a href="{%url 'Register' %}"
                 class="text-reset">Register here</a></p>
           </div>
         </div>
-        <div class="col-sm-6">
-          <img src="{% static 'images/login1.jpg'%}" alt="login image" class="login-img">
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="{% static 'images/job_portal_about.png'%}" alt="login image" class="login-img" style="margin-right: 8px;">
         </div>
       </div>
     </div>

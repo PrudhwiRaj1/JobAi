@@ -117,7 +117,7 @@ def read_word_document(request):
                 extracted_details = extract_resume_details(content)
                 # resume_details = ResumeDetails.objects.create(**extracted_details)
 
-                 # Check if essential details are missing
+                # Check if essential details are missing
                 if not extracted_details.get("name") or not extracted_details.get("email") or not extracted_details.get("phone"):
                     alert_message = "*Failed to extract your resume.Check your file and try again."
                 else:
@@ -149,8 +149,8 @@ def convert_docx_to_json(docx_path, filename):
 # Create your views here.
 
 
-def login(request):
-    return render(request, 'login.html')
+def jobseeker_login(request):
+    return render(request, 'jobseeker_login.html')
 
 
 def home(request):
@@ -175,7 +175,7 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
-def base(request):
+def user_base(request):
     return render(request, 'base.html')
 
 
@@ -204,3 +204,6 @@ def autoapply(request):
 
 def user_type(request):
     return render(request,'user-type.html')
+
+def companylogin(request):
+    return render(request,'company_login.html')
