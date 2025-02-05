@@ -211,23 +211,31 @@ def company_login(request):
         name=Company.objects.get(email=Email,password=Password)
     return render(request,'company_login.html')
 def company_registration(request):
-        if request.method == "POST":
-           name=request.POST.get('Username')
-           email=request.POST.get('email')
-           password=request.POST.get('password')
-           company_type=request.POST.get('CompanyType')
-           company_address=request.POST.get('Address')
-           companyobj=Company()
-           companyobj.name=name
-           companyobj.password=password
-           companyobj.email=email
-           companyobj.companytype=company_type
-           companyobj.address=company_address
-           companyobj.save()
-           return render(request,'company_registration.html')
-        return render(request,'company_registration.html')
+    if request.method == "POST":
+        name=request.POST.get('company_name')
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        company_type=request.POST.get('CompanyType')
+        company_address=request.POST.get('Address')
+        # Check if a company with the same name or email already exists
+        if Company.objects.filter(name=name).exists() or Company.objects.filter(email=email).exists():
+            messages.error(request, "A company with this name or email already exists. Please use different details.")
+        else:
+            # Create and save the company
+            companyobj=Company()
+            companyobj.name=name
+            companyobj.password=password
+            companyobj.email=email
+            companyobj.companytype=company_type
+            companyobj.address=company_address
+            companyobj.save()
+            messages.success(request, "Company registered successfully!")
+            return render(request,'company_registration.html')
+    return render(request,'company_registration.html')
 
 def company_forgot_password(request):
     return render(request,'company_forgot_pwd.html')
 def company_dashboard(request):
     return render(request,'company_dashboard.html')
+def company_settings(request):
+    return render(request,'company_settings_view.html')

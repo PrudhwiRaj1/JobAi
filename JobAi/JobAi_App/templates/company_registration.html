@@ -5,21 +5,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JobAi | Register</title>
+  <title>JobAi | Company Registration</title>
   <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="{% static 'assets/css/login.css'%}">
   <style>
-    .form-control
-    {
+    .form-control input {
       width: 340px;
       padding: 5px 2px;
+    }
+
+    .password-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-group .eye-icon {
+      cursor: pointer;
+    }
+
+
+    .password-container input {
+      width: 100%;
+      padding-right: 40px;
+      /* Space for the icon */
+    }
+
+    .password-container .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
     }
   </style>
 </head>
 
-<body  style="background-image: url('../static/images/bg1.png');">
+<body style="background-image: url('../static/images/bg1.png');">
   <main>
     <div class="container-fluid">
       <div class="row">
@@ -35,7 +59,7 @@
               {% csrf_token %}
               <div class="form-group mb-1">
                 <label for="Username">Company Name</label>
-                <input type="text" name="Username" id="Username" class="form-control" placeholder="Enter Company Name"
+                <input type="text" name="company_name" id="Username" class="form-control" placeholder="Enter Company Name"
                   required>
               </div>
               <div class="form-group mb-1">
@@ -43,25 +67,31 @@
                 <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email Address"
                   required>
               </div>
-              <div class="form-group mb-1">
+              <div class="form-group password-container">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password"
-                  required>
-              </div>
+                <div class="input-group">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
+                    <div class="input-group-append" style="border: 0px solid white;">
+                        <span>
+                            <i class="fas fa-eye-slash eye-icon mx-2" id="togglePassword" onclick="togglePassword()"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
               <div class="form-group mb-1">
                 <label for="Company Type">Company Type</label>
                 <select id="Company_Type" name="CompanyType" class="form-control" required>
-                <option selected disabled value="" >--Select Company Type--</option>
-                <option value="MNC">Multinational Company</option>
-                <option value="Startup">Startup Company</option>
-                <option value="LLC">Limited Liability Company</option>
+                  <option selected disabled value="">--Select Company Type--</option>
+                  <option value="MNC">Multinational Company</option>
+                  <option value="Startup">Startup Company</option>
+                  <option value="LLC">Limited Liability Company</option>
                 </select>
               </div>
               <div class="form-group">
-              <label for="Company_Address">Company Address</label>
-              <input type="text" name="Address" id="Address" class="form-control" placeholder="Enter Address(ex:Bangalore,Karnataka)"
-                required>
-            </div>
+                <label for="Company_Address">Company Address</label>
+                <input type="text" name="Address" id="Address" class="form-control"
+                  placeholder="Enter Address(ex:Bangalore,Karnataka)" required>
+              </div>
               <button name="Signup" id="Signup" class="btn btn-block btn-primary w-100 mt-2">Signup</button>
             </form>
             <a href="{% url 'company_login' %}" class="text-reset mt-1">Already have an account?Login</a>
@@ -72,7 +102,32 @@
         </div>
       </div>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
   </main>
 </body>
+<script>
+  function togglePassword() {
+    let passwordInput = document.getElementById("password");
+    let eye = document.getElementById("togglePassword");
+
+    // Toggle the password visibility by changing the input type
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";  // Show password
+      eye.classList.remove("fa-eye");
+      eye.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";  // Hide password
+      eye.classList.remove("fa-eye-slash");
+      eye.classList.add("fa-eye");
+    }
+  }
+</script>
 
 </html>

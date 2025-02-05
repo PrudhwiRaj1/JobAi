@@ -1,4 +1,4 @@
-{%extends 'base.html'%}
+{%extends 'company_base.html'%}
 {% load static %}
 {% block content %}
 <style>
@@ -51,7 +51,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobAi|Settings</title>
+    <title>JobAi| Company Settings</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -68,7 +68,7 @@
 <body class="{% if dark_mode %}dark-mode{% endif %}">
     <div class="main-content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+            <div class="container-fluid " style="border-radius: 15px;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
