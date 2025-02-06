@@ -88,7 +88,7 @@ def extract_resume_details(content):
 def read_word_document(request):
     content = ""
     alert_message=""
-    resume_details = None
+    extracted_details = None
     if request.method == "POST":
         uploaded_file = request.FILES.get("word_file")
         if uploaded_file:
@@ -125,7 +125,7 @@ def read_word_document(request):
                 # return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
             except Exception as e:
                 return JsonResponse({"error": f"Error reading document: {str(e)}"}, status=500)
-    return render(request, "home.html",{"resume_details": extracted_details,"alert_message": alert_message,"fname":username(request)})
+    return render(request, "jobseeker_home.html",{"resume_details": extracted_details,"alert_message": alert_message})
 
 
 def convert_docx_to_json(docx_path, filename):
@@ -149,11 +149,15 @@ def convert_docx_to_json(docx_path, filename):
 
 
 def jobseeker_login(request):
+    if request.method=="POST":
+        Email=request.POST.get("email")
+        Password=request.POST.get("password")
+        name=Company.objects.get(email=Email,password=Password)
     return render(request, 'jobseeker_login.html')
 
 
 def home(request):
-    return render(request, 'home.html', username(request))
+    return render(request, 'jobseeker_home.html', username(request))
 
 
 def main(request):
@@ -163,6 +167,23 @@ def base(request):
     return render(request,'base.html')
 
 def Register(request):
+    name=""
+    email=""
+    password=""
+    if request.method == "POST":   
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        if Jobseeker_Registration.objects.filter(name=name).exists() and Jobseeker_Registration.objects.filter(email=email).exists():
+            messages.error(request, "A Jobseeker with this name and/or email already exists. Please use different details.")
+        else:
+            jobseeker_obj=Jobseeker_Registration()
+            jobseeker_obj.name=name
+            jobseeker_obj.email=email
+            jobseeker_obj.password=password
+            jobseeker_obj.save()
+            messages.success(request, "Jobseeker registered successfully!.Email will be your Username")
+            return render(request,'jobseeker_register.html')
     return render(request, 'jobseeker_register.html')
 
 
@@ -210,6 +231,7 @@ def company_login(request):
         Password=request.POST.get("password")
         name=Company.objects.get(email=Email,password=Password)
     return render(request,'company_login.html')
+
 def company_registration(request):
     if request.method == "POST":
         name=request.POST.get('company_name')
@@ -218,7 +240,7 @@ def company_registration(request):
         company_type=request.POST.get('CompanyType')
         company_address=request.POST.get('Address')
         # Check if a company with the same name or email already exists
-        if Company.objects.filter(name=name).exists() or Company.objects.filter(email=email).exists():
+        if Company.objects.filter(name=name).exists() and Company.objects.filter(email=email).exists():
             messages.error(request, "A company with this name or email already exists. Please use different details.")
         else:
             # Create and save the company
@@ -229,12 +251,13 @@ def company_registration(request):
             companyobj.companytype=company_type
             companyobj.address=company_address
             companyobj.save()
-            messages.success(request, "Company registered successfully!")
+            messages.success(request, "Company registered successfully!.Email will be your Username")
             return render(request,'company_registration.html')
     return render(request,'company_registration.html')
 
 def company_forgot_password(request):
     return render(request,'company_forgot_pwd.html')
+
 def company_dashboard(request):
     return render(request,'company_dashboard.html')
 def company_settings(request):

@@ -103,12 +103,14 @@
       </div>
     </div>
     {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-success">
-      {{ message }}
+    <div id="message-container">
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    {% endif %}
+{% endif %}
 
   </main>
 </body>
@@ -128,6 +130,14 @@
       eye.classList.add("fa-eye");
     }
   }
+  setTimeout(function() {
+        let messageContainer = document.getElementById("message-container");
+        if (messageContainer) {
+            messageContainer.style.transition = "opacity 0.5s";
+            messageContainer.style.opacity = "1"; // Fade out effect
+            setTimeout(() => messageContainer.remove(), 500); // Remove from DOM
+        }
+    }, 5000);
 </script>
 
 </html>
