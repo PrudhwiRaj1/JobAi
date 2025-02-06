@@ -8,7 +8,7 @@
     <title>JobAi | Company Reset Password</title>
     <link rel="icon" href="{% static 'images/JobAi-logo1.png' %}">
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'assets/css/login.css'%}">
 </head>
 
@@ -20,8 +20,8 @@
                     <div class="brand-wrapper">
                         <a href="{% url 'index'%}"> <img src="{% static 'images/JobAi2.png'%}" alt="logo" class="logo"
                                 style="height: 90px;border-radius: 25px;box-shadow: 0 0 20px rgb(48, 35, 229);"></a>
-                        <h5 class="mt-5">Company Password Reset</h5>
                     </div>
+                    <h4>Company Password Reset</h4>
                     <div class="login-wrapper my-auto">
                         <form method="post">
                             {% csrf_token %}

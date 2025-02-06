@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
   <link rel="stylesheet" href="{% static 'assets/css/login.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body style="opacity: 0.9;">
@@ -20,7 +21,6 @@
           <div class="brand-wrapper">
             <a href="{% url 'index'%}"> <img src="{% static 'images/JobAi2.png'%}" alt="logo" class="logo"
                 style="height: 90px;border-radius: 25px;box-shadow: 0 0 20px rgb(48, 35, 229);"></a>
-
           </div>
           <h4>Jobseeker Registration</h4>
           <div class="login-wrapper my-auto">
@@ -35,12 +35,16 @@
                 <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email Address"
                   required>
               </div>
-              <div class="form-group mb-4">
+              <div class="form-group password-container">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password"
-                  required>
-              </div>
-              <button name="Signup" id="Signup" class="btn btn-block btn-primary w-100">Signup</button>
+                <div class="input-group">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" style="width: 200px;" required>
+                        <span>
+                            <i class="fas fa-eye-slash eye-icon mx-2" id="togglePassword" onclick="togglePassword()"></i>
+                        </span>
+                </div>
+            </div>
+              <button name="Signup" id="Signup" class="btn btn-block btn-primary w-100 mt-2">Signup</button>
             </form>
             <br>
             <a href="{% url 'jobseeker_login' %}" class="text-reset">Already have an account?Login</a>
@@ -63,6 +67,21 @@
   </main>
 </body>
 <script>
+    function togglePassword() {
+    let passwordInput = document.getElementById("password");
+    let eye = document.getElementById("togglePassword");
+
+    // Toggle the password visibility by changing the input type
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";  // Show password
+      eye.classList.remove("fa-eye");
+      eye.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";  // Hide password
+      eye.classList.remove("fa-eye-slash");
+      eye.classList.add("fa-eye");
+    }
+  }
    setTimeout(function() {
         let messageContainer = document.getElementById("message-container");
         if (messageContainer) {
