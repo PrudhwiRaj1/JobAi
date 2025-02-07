@@ -1,8 +1,8 @@
-{%extends 'company_base.html'%}
-{% load static %}
+{% extends 'company_base.html' %}
+
 {% block content %}
 <style>
-    .switch {
+     .switch {
         position: relative;
         display: inline-block;
         width: 50px;
@@ -46,131 +46,123 @@
     input:checked+.slider:before {
         transform: translateX(24px);
     }
+
 </style>
+<div class="container mt-4">
+    <h3 class="mb-4">Company Settings</h3>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobAi| Company Settings</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body {
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-    </style>
-</head>
-
-<body class="{% if dark_mode %}dark-mode{% endif %}">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid " style="border-radius: 15px;">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{%static 'images/profile.jpeg'%}" class="rounded-circle" alt="Profile"
-                                    height="50px" />
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <div>
-                                    <a href="{%url 'support' %}" class="nav-link fw-bold">
-                                        <li><i class="fa-solid fa-comment"></i> &emsp;Support</li>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{%url 'user-type'%}" class="nav-link fw-bold">
-                                        <li><i class="fas fa-sign-out-alt"></i> &emsp;Logout
-                                        </li>
-                                    </a>
-                                </div>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+    <div class="row">
+        <!-- Company Profile Section -->
+        <div class="col-md-6">
+            <div class="card p-3 mb-4">
+                <h5>Company Profile</h5>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-control" placeholder="Your Company Name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Company Logo</label>
+                        <input type="file" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Company Description</label>
+                        <textarea class="form-control" rows="3">Your company description here...</textarea>
+                    </div>
+                </form>
             </div>
-        </nav>
+        </div>
 
-        <h2 id="profile">Settings</h2>
+        <!-- Company Details Section -->
+        <div class="col-md-6">
+            <div class="card p-3 mb-4">
+                <h5>Company Details</h5>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Industry</label>
+                        <input type="text" class="form-control" placeholder="Technology">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" placeholder="New York, USA">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Number of Employees</label>
+                        <select class="form-control" required>
+                            <option value="" disabled selected>--Choose No. of Employees--</option>
+                            <option>1-10</option>
+                            <option>11-50</option>
+                            <option>51-200</option>
+                            <option>201-500</option>
+                            <option>500+</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        <form method="POST" class="container1 mx-4" style="margin-top: 95px;">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <label for="theme">Theme</label>
-            <select name="theme" id="change" class="mx-4 w-75" required>
-                <option placeholder="Select Theme" disabled value="" selected>--Select Theme--</option>
-                <option value="Light">Light(Default)</option>
-                <option value="Dark">Dark</option>
-            </select>
-            <div class="form-group"><label for="auto-apply">Auto-Apply Feature</label>
+    <!-- Account Settings Section -->
+    <div class="card p-3">
+        <h5>Account Settings</h5>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Email</label><span class="text-danger mx-1">*</span>
+                <input type="email" class="form-control w-75" placeholder="company@example.com">
+            </div>
+            <div class="form-group mb-3"><label for="auto-apply">Auto-Apply Feature</label>
                 <label class="switch">
                     <input type="checkbox" id="toggleSwitch">
                     <span class="slider"></span>
                 </label>
                 <span id="status" class="fw-bold mx-5">(Auto-Apply Feature is Disabled)</span>
             </div>
-            <label for="Change Username">Change Email</label>
-            <input type="mail" id="mail" name="mail" class="input1 w-75 mx-3" placeholder="example@gmail.com">
-            <label for="New Password">New Password</label>
-            <div class="form-group">
-                <input type="password" name="password" id="password1" class="input1 w-75 ml-2">
+            <h6 class="mt-3">Change Password(Optional)</h6>
+            <label for="New Password" class="mb-3">New Password</label>
+            <div class="form-group mb-3">
+                <input type="password" name="password" id="password1" class="input1 w-75 ml-2" placeholder="New Password">
             </div>
-            <label for="Confirm Password" Change Password>Confirm Password</label>
-            <div class=" form-group ">
-                <input type="password" name="password" id="password" class="input1 w-75 ml-2"><span>
+            <label for="Confirm Password" class="mb-3">Confirm Password</label>
+            <div class=" form-group mb-3">
+                <input type="password" name="password" id="password" class="input1 w-75 ml-2" placeholder="Confirm Password"><span>
                     <i class="fas fa-eye eye-icon" id="togglePassword" onclick="togglePassword()"></i></span>
             </div>
-            <button type="submit" class="m-5 ">Save Settings</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-3">Save Changes</button><br>
+            <span class="text-danger">*</span>-Required fields
         </form>
-        <div class="container mx-4 w-75">
-            <h3 class="fw-bold" style="margin-left: 25px;">Danger Zone</h3>
-            <form id="deleteAccountForm" action="" method="POST" class="mt-3">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger fw-bold mx-5 mt-3 w-50">Delete Account</button>
-            </form>
-        </div>
-        <script>
-            function togglePassword() {
-                let passwordInput = document.getElementById("password");
-                let eye = document.getElementById("togglePassword");
-
-                // Toggle the password visibility by changing the input type
-                if (passwordInput.type === "password") {
-                    passwordInput.type = "text";  // Show password
-                    eye.classList.remove("fa-eye");
-                    eye.classList.add("fa-eye-slash");
-                } else {
-                    passwordInput.type = "password";  // Hide password
-                    eye.classList.remove("fa-eye-slash");
-                    eye.classList.add("fa-eye");
-                }
-            }
-            const toggleSwitch = document.getElementById("toggleSwitch");
-            const statusText = document.getElementById("status");
-
-            toggleSwitch.addEventListener("change", function () {
-                if (this.checked) {
-                    statusText.innerText = "(Auto-Apply Feature is Enabled)";
-                    // Add your turn-on functionality here
-                    statusText.style.color = "green"; // Change text color to green
-
-                } else {
-                    statusText.innerText = "(Auto-Apply Feature is Disabled)";
-                    // Add your turn-off functionality here
-                    statusText.style.color = "black"; // Change text color to black
-
-                }
-            });
-        </script>
     </div>
-</body>
-{%endblock%}
+</div>
+<script>
+    function togglePassword() {
+        let passwordInput = document.getElementById("password");
+        let eye = document.getElementById("togglePassword");
+
+        // Toggle the password visibility by changing the input type
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";  // Show password
+            eye.classList.remove("fa-eye");
+            eye.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";  // Hide password
+            eye.classList.remove("fa-eye-slash");
+            eye.classList.add("fa-eye");
+        }
+    }
+    const toggleSwitch = document.getElementById("toggleSwitch");
+    const statusText = document.getElementById("status");
+
+    toggleSwitch.addEventListener("change", function () {
+        if (this.checked) {
+            statusText.innerText = "(Auto-Apply Feature is Enabled)";
+            // Add your turn-on functionality here
+            statusText.style.color = "green"; // Change text color to green
+
+        } else {
+            statusText.innerText = "(Auto-Apply Feature is Disabled)";
+            // Add your turn-off functionality here
+            statusText.style.color = "black"; // Change text color to black
+
+        }
+    });
+</script>
+{% endblock %}

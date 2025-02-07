@@ -39,14 +39,25 @@
 
     <div class="container w-50 mt-4" style="margin-right: 250px;margin-left: 25px;">
         <h4 class="text-center">Upload Resume in doc,docx format</h4>
-        <form method="POST" id="uploadForm" enctype="multipart/form-data" action="../read_word_document/">
+        <form  action="../read_word_document/" method="POST" id="uploadForm" enctype="multipart/form-data">
             {% csrf_token %}
 
             <input type="file" id="fileInput" name="word_file" accept=".doc,.docx" required>
             <button type="submit" id="submit">Upload and Submit</button>
             
         </form>
+        <div class="message-container">
 <input class="text-danger text-center mx-1 border-light border-0 w-100" value="{{alert_message}}">
+        </div>
+        {% if messages %}
+        <div id="message-container">
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
         <!-- {% if content %}
             <div class="content">
@@ -121,6 +132,7 @@
                 </center>
             </div>
         </form>
+
     </div>
     <script>
     function toggleEditable() {
@@ -131,5 +143,13 @@
       input.setAttribute("readonly", true);
     }
   }
+  setTimeout(function() {
+        let messageContainer = document.getElementById("message-container");
+        if (messageContainer) {
+            messageContainer.style.transition = "opacity 0.5s";
+            messageContainer.style.opacity = "1"; // Fade out effect
+            setTimeout(() => messageContainer.remove(), 500); // Remove from DOM
+        }
+    }, 5000);
     </script>
     {%endblock%}

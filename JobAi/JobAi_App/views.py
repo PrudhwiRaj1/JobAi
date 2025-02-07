@@ -91,10 +91,15 @@ def read_word_document(request):
     extracted_details = None
     if request.method == "POST":
         uploaded_file = request.FILES.get("word_file")
+        resume=request.POST.get("word_file")
+        jobseeker_resumeobj=jobseeker_resume()
+        jobseeker_resumeobj.resume=resume
+        jobseeker_resumeobj.save()
         if uploaded_file:
             # Validate file extension
             if not uploaded_file.name.lower().endswith(('.doc', '.docx')) and not uploaded_file.name.lower().contains("Resume","CV"):
                 return JsonResponse({"error": "Only Resumes with .doc and .docx files are allowed."}, status=400)
+                return redirect("jobseeker_home")
             try:
                 # Ensure media directories exist
                 documents_dir = os.path.join(settings.MEDIA_ROOT, "documents")
@@ -119,14 +124,16 @@ def read_word_document(request):
                 # Check if essential details are missing
                 if not extracted_details.get("name") or not extracted_details.get("email") or not extracted_details.get("phone"):
                     alert_message = "*Failed to extract your resume.Check your file and try again."
+                    jobseeker_resumeobj.delete()
                 else:
                     # Convert document to JSON and save
                     json_data = convert_docx_to_json(file_path, uploaded_file.name)
-                # return JsonResponse({"document_data":json.loads(json_data), "resume_details": extracted_details})
-            except Exception as e:
-                return JsonResponse({"error": f"Error reading document: {str(e)}"}, status=500)
+                    messages.success(request, "Resume uploaded successfully!")                    
+            except Exception as e: 
+                messages.error(request, f"Error reading document: {str(e)}")
     return render(request, "jobseeker_home.html",{"resume_details": extracted_details,"alert_message": alert_message})
-
+    
+    
 
 def convert_docx_to_json(docx_path, filename):
     """Convert a .docx file to JSON format and save it to media folder"""
@@ -152,13 +159,17 @@ def jobseeker_login(request):
     if request.method=="POST":
         Email=request.POST.get("email")
         Password=request.POST.get("password")
-        name=Company.objects.get(email=Email,password=Password)
+        try:
+            jobseeker = Jobseeker_Registration.objects.get(email=Email, password=Password)
+            messages.success(request, "Login Successfully")
+            return redirect('jobseeker_home')  # Redirect to a dashboard or home page after login
+        except Jobseeker_Registration.DoesNotExist:
+            messages.error(request, "Invalid Email or Password")
     return render(request, 'jobseeker_login.html')
 
 
-def home(request):
+def jobseeker_home(request):
     return render(request, 'jobseeker_home.html', username(request))
-
 
 def main(request):
     return render(request, 'index.html')
@@ -189,10 +200,6 @@ def Register(request):
 
 def Forgot_pwd(request):
     return render(request, 'forgot-password.html')
-
-
-def dashboard(request):
-    return render(request, 'dashboard.html')
 
 
 def user_base(request):
@@ -230,6 +237,7 @@ def company_login(request):
         Email=request.POST.get("email")
         Password=request.POST.get("password")
         name=Company.objects.get(email=Email,password=Password)
+        
     return render(request,'company_login.html')
 
 def company_registration(request):
@@ -262,3 +270,7 @@ def company_dashboard(request):
     return render(request,'company_dashboard.html')
 def company_settings(request):
     return render(request,'company_settings_view.html')
+def company_jobs(request):
+    return render(request,'company_jobs.html')
+def company_postjob(request):
+    return render(request,'company_postjob.html')

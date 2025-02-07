@@ -7,8 +7,29 @@ class Jobseeker_Registration(models.Model):
     password=models.CharField(max_length=255)
     def __str__(self):
         return self.name
+
+class jobseeker_profile(models.Model):    
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    dob = models.CharField(max_length=50, blank=True, null=True)
+    highest_qualification = models.CharField(max_length=255, blank=True, null=True)
+    job_preference = models.CharField(max_length=255, blank=True, null=True)
+    university = models.CharField(max_length=255, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    skills = models.TextField(blank=True, null=True)
+    resume = models.FileField(upload_to='documents/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name if self.name else "Unnamed Jobseeker"
     
-    
+class jobseeker_resume(models.Model): 
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # user is required, cannot be null
+    file = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Document uploaded by {self.user.username} on {self.uploaded_at}"
 
 class Company(models.Model):
     password=models.CharField(max_length=255)

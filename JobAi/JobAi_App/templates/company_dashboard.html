@@ -1,118 +1,113 @@
 {% extends 'company_base.html' %}
 {% load static %}
-
-{% block title %}Company Dashboard{% endblock %}
-
 {% block content %}
-<div class="container-fluid py-4">
+<div class="container-fluid mt-4">
     <div class="row">
-        <!-- Welcome Card -->
-        <div class="col-md-12">
-            <div class="card shadow-sm rounded-lg border-0 p-4 text-white bg-primary">
-                <h2 class="mb-0">Welcome, {{ company.name }}!</h2>
-                <p class="mb-0">Manage your job postings, applications, and company profile.</p>
-            </div>
-        </div>
-    </div>
-<style>
-    .sidebar{
-        height:218vh;
-    }
-</style>
-    <div class="row mt-4">
-        <!-- Total Jobs Posted -->
-        <div class="col-md-4">
-            <div class="card shadow-sm rounded-lg text-center p-4">
-                <h5>Total Jobs Posted</h5>
-                <h3 class="text-primary">{{ total_jobs }}</h3>
-            </div>
-        </div>
-        
-        <!-- Applications Received -->
-        <div class="col-md-4">
-            <div class="card shadow-sm rounded-lg text-center p-4">
-                <h5>Applications Received</h5>
-                <h3 class="text-success">{{ total_applications }}</h3>
-            </div>
-        </div>
 
-        <!-- Shortlisted Candidates -->
-        <div class="col-md-4">
-            <div class="card shadow-sm rounded-lg text-center p-4">
-                <h5>Shortlisted Candidates</h5>
-                <h3 class="text-warning">{{ total_shortlisted }}</h3>
+        <!-- Right Side Content -->
+        <div class="col-lg-9 col-md-12">
+            <!-- Profile Overview -->
+            <div class="card shadow-sm p-4 mb-4">
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'images/company_profile.jpg' %}" alt="Profile" class="rounded-circle me-3" width="60">
+                    <div>
+                        <h5 class="mb-1">Welcome Back, Recruiter!</h5>
+                        <p class="text-muted">Manage your jobs, candidates, and settings easily.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Graphical Representation -->
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card shadow-sm rounded-lg p-4">
-                <h4>Job Applications Overview</h4>
-                <canvas id="applicationsChart"></canvas>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <h4 class="mt-2 mx-3 p-2">Job Status Distribution</h4>
-                <canvas id="jobStatusChart"></canvas>
-            </div>
-        </div>
-    </div>
+            <!-- Tabs for Navigation -->
+            <ul class="nav nav-pills mb-3">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#jobs">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#applications">Applications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#messages">Messages</a>
+                </li>
+            </ul>
 
-    <!-- Edit Profile -->
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="card shadow-sm rounded-lg p-4">
-                <h4>Edit Profile</h4>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="company_name" class="form-label">Company Name</label>
-                        <input type="text" name="company_name" id="company_name" class="form-control" value="{{ company.name }}" required>
+            <div class="tab-content">
+                <!-- Jobs Section -->
+                <div id="jobs" class="tab-pane fade show active">
+                    <div class="card p-3 mb-3">
+                        <h5>Active Job Postings</h5>
+                        <p>You have <b>14</b> jobs posted.</p>
+                        <a href="{%url 'Post Job' %}"><button class="btn btn-primary">+ Post New Job</button></a>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" value="{{ company.email }}" required>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card shadow-sm p-3">
+                                <h6>Software Engineer</h6>
+                                <p class="text-muted">New York - Full-time</p>
+                                <button class="btn btn-outline-primary btn-sm">View Applicants</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card shadow-sm p-3">
+                                <h6>Accountant</h6>
+                                <p class="text-muted">Berlin - Full-time</p>
+                                <button class="btn btn-outline-primary btn-sm">View Applicants</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="company_address" class="form-label">Company Address</label>
-                        <input type="text" name="company_address" id="company_address" class="form-control" value="{{ company.address }}" required>
+                </div>
+
+                <!-- Applications Section -->
+                <div id="applications" class="tab-pane fade">
+                    <div class="card p-3 mb-3">
+                        <h5>New Applicants</h5>
+                        <p>You have <b>6</b> new applications.</p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/user1.png' %}" class="rounded-circle me-3" width="40">
+                                <div>
+                                    <h6 class="mb-0">David Lee</h6>
+                                    <small class="text-muted">Applied for Blog Writer</small>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/user2.png' %}" class="rounded-circle me-3" width="40">
+                                <div>
+                                    <h6 class="mb-0">Jenny Kim</h6>
+                                    <small class="text-muted">Applied for Infrastructure Engineer</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Messages Section -->
+                <div id="messages" class="tab-pane fade">
+                    <div class="card p-3 mb-3">
+                        <h5>Recent Messages</h5>
+                        <p>Check conversations with applicants.</p>
+                    </div>
+
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/user3.png' %}" class="rounded-circle me-3" width="40">
+                                <div>
+                                    <h6 class="mb-0">John Doe</h6>
+                                    <small class="text-muted">"I am interested in the role..."</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
+                </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    var ctx1 = document.getElementById('applicationsChart').getContext('2d');
-    var applicationsChart = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['Total Jobs', 'Applications Received', 'Shortlisted'],
-            datasets: [{
-                label: 'Count',
-                // data: [{{ total_jobs }}, {{ total_applications }}, {{ total_shortlisted }}],
-                backgroundColor: ['#007bff', '#28a745', '#ffc107']
-            }]
-        }
-    });
-
-    var ctx2 = document.getElementById('jobStatusChart').getContext('2d');
-    var jobStatusChart = new Chart(ctx2, {
-        type: 'doughnut',
-        data: {
-            labels: ['Active Jobs', 'Closed Jobs'],
-            datasets: [{
-                label: 'Job Status',
-                // data: [{{ active_jobs }}, {{ closed_jobs }}],
-                backgroundColor: ['#17a2b8', '#dc3545']
-            }]
-        }
-    });
-</script>
 {% endblock %}

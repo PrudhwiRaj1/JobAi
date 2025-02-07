@@ -1,0 +1,100 @@
+{% extends 'company_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4">Post a New Job</h3>
+
+    <div class="card p-4 shadow-lg">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Job Title -->
+            <div class="mb-3">
+                <label class="form-label">Job Title</label><span class="text-danger mx-2">*</span>
+                <input type="text" class="form-control" placeholder="Enter job title" required>
+            </div>
+
+            <!-- Job Description -->
+            <div class="mb-3">
+                <label class="form-label">Job Description</label><span class="text-danger mx-2">*</span>
+                <textarea class="form-control" rows="5" placeholder="Describe the job role and responsibilities" required></textarea>
+            </div>
+
+            <!-- Salary & Location Row -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Salary (Annual)</label><span class="text-danger mx-2">*</span>
+                    <input type="text" class="form-control" placeholder="e.g., $50,000 - $80,000" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Location</label><span class="text-danger mx-2">*</span>
+                    <input type="text" class="form-control" placeholder="e.g., New York, Remote" required>
+                </div>
+            </div>
+
+            <!-- Job Type & Experience Level Row -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Job Type</label><span class="text-danger mx-2">*</span>
+                    <select class="form-control" required>
+                        <option>Full-time</option>
+                        <option>Part-time</option>
+                        <option>Remote</option>
+                        <option>Contract</option>
+                        <option>Internship</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Experience Level</label><span class="text-danger mx-2">*</span>
+                    <select class="form-control" required>
+                        <option value="" disabled selected>--Choose Experience Level--</option>
+                        <option>Entry Level/Fresher</option>
+                        <option>Mid Level</option>
+                        <option>Senior Level</option>
+                        <option>Manager</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Highest Qualification / Eligibility -->
+            <div class="mb-3">
+                <label class="form-label">Highest Qualification / Eligibility Criteria</label><span class="text-danger mx-2">*</span>
+                <select class="form-control" required>
+                    <option value=""disabled selected>--Choose Highest Qualification</option>
+                    <option>Btech Computer Science</option>
+                    <option>MTech Computer Science</option>
+                    <option>PhD</option>
+                    <option>Msc Computer Science</option>
+                    <option>MCA</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <!-- Skills Required (Multi-Select) -->
+            <div class="mb-3">
+                <label class="form-label">Skills Required</label><span class="text-danger mx-2">*</span>
+                <select class="form-control" multiple required>
+                    <option>Python</option>
+                    <option>JavaScript</option>
+                    <option>SQL</option>
+                    <option>Project Management</option>
+                    <option>Marketing</option>
+                    <option>Machine Learning</option>
+                    <option>Communication</option>
+                </select>
+                <small class="text-muted">Hold CTRL (Windows) or CMD (Mac) to select multiple.</small>
+            </div>
+
+            <!-- Application Deadline -->
+            <div class="mb-3">
+                <label class="form-label">Application Deadline</label><span class="text-danger mx-2">*</span>
+                <input type="date" class="form-control" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 mb-3">Post Job</button><br>
+            <span class="text-danger">*</span>- Required fields
+        </form>
+    </div>
+</div>
+{% endblock %}
