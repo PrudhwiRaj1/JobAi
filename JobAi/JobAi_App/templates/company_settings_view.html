@@ -58,16 +58,16 @@
                 <h5>Company Profile</h5>
                 <form>
                     <div class="mb-3">
-                        <label class="form-label">Company Name</label>
-                        <input type="text" class="form-control" placeholder="Your Company Name">
+                        <label class="form-label">Company Name</label><span class="text-danger mx-1">*</span>
+                        <input type="text" class="form-control" placeholder="Your Company Name" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Company Logo</label>
-                        <input type="file" class="form-control">
+                        <label class="form-label">Company Logo</label><span class="text-danger mx-1">*</span>
+                        <input type="file" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Company Description</label>
-                        <textarea class="form-control" rows="3">Your company description here...</textarea>
+                        <label class="form-label">Company Description</label><span class="text-danger mx-1">*</span>
+                        <textarea class="form-control" rows="3" required></textarea>
                     </div>
                 </form>
             </div>
@@ -79,15 +79,15 @@
                 <h5>Company Details</h5>
                 <form>
                     <div class="mb-3">
-                        <label class="form-label">Industry</label>
-                        <input type="text" class="form-control" placeholder="Technology">
+                        <label class="form-label">Industry</label><span class="text-danger mx-1">*</span>
+                        <input type="text" class="form-control" placeholder="Technology" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Location</label>
-                        <input type="text" class="form-control" placeholder="New York, USA">
+                        <label class="form-label">Location</label><span class="text-danger mx-1">*</span>
+                        <input type="text" class="form-control" placeholder="New York, USA" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Number of Employees</label>
+                        <label class="form-label">Number of Employees</label><span class="text-danger mx-1">*</span>
                         <select class="form-control" required>
                             <option value="" disabled selected>--Choose No. of Employees--</option>
                             <option>1-10</option>

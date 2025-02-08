@@ -20,9 +20,9 @@
         :root {
             --primary-color: #007bff;
             --secondary-color: #0056b3;
-            --sidebar-bg: #ffffff;
-            --text-color: #333;
-            --hover-bg: rgba(0, 123, 255, 0.1);
+            --sidebar-bg: rgb(160, 0, 247);;
+            --text-color: white;
+            --hover-bg:  #386ca3;
         }
 
         body {
@@ -36,9 +36,12 @@
             width: 260px;
             height: 100vh;
             background: var(--sidebar-bg);
+            color: white;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             padding-top: 20px;
             position: fixed;
+            overflow-y: auto;
+            scrollbar-width: thin ;
             transition: all 0.3s ease-in-out;
             z-index: 1000;
         }
@@ -49,7 +52,7 @@
             gap: 10px;
             padding: 15px;
             font-size: 20px;
-            font-weight: 600;
+            font-weight: bold;
             color: var(--primary-color);
         }
 
@@ -57,6 +60,7 @@
             list-style: none;
             padding: 0;
             margin-top: 20px;
+            gap: 5px;
         }
 
         .sidebar-menu li {
@@ -76,7 +80,7 @@
 
         .sidebar-menu a:hover, .sidebar-menu a.active {
             background-color: var(--hover-bg);
-            color: var(--primary-color);
+            color: white;
         }
 
         /* Main Content */
@@ -88,6 +92,9 @@
 
         /* Navbar */
         .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             background: var(--primary-color);
             color: white;
             padding: 15px 20px;
@@ -142,18 +149,29 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="brand d-flex align-items-center">
-            <a href="/"><img src="{% static 'images/JobAi2.png' %}" alt="JobAi" height="50px" class="mx-3" style="border-radius: 25px;"></a>
+          <center><a href="/"><img src="{% static 'images/JobAi2.png' %}" alt="JobAi" height="50px" class="mx-3" style="border-radius: 25px;"></a></center>
         </div>
         <ul class="sidebar-menu">
-            <hr class="bg-black">
-            <h6 class="text-center">Company</h6>
-            <li><a href="{% url 'company_dashboard' %}"><i class="fas fa-home"></i> <span class="mx-2">Dashboard</span></a></li>
-            <li><a href="{% url 'job listing' %}"><i class="fas fa-briefcase"></i> <span class="mx-2">Jobs</span></a></li>
-            <li><a href="#"><i class="fas fa-user"></i> <span class="mx-2">Applicants</span></a></li>
-            <li><a href="#"><i class="fas fa-comments"></i> <span class="mx-2">Messages</span></a></li>
-            <li><a href="#"><i class="fas fa-calendar"></i> <span class="mx-2">Meetings</span></a></li>
-            <li><a href="{% url 'company_settings' %}"><i class="fas fa-cog"></i> <span class="mx-2">Settings</span></a></li>
-            <li><a href="#"><i class="fas fa-sign-out-alt"></i> <span class="mx-2">Logout</span></a></li>
+            <hr>
+            <center><img src="{%static 'images/company_profile.jpg'%}" alt="" height="65px" style="border-radius: 20px;"></center>
+            <h6 class="text-center fw-bold">Company</h6>
+            <hr>
+            <li><a href="{% url 'company_dashboard' %}"><i class="fas fa-home mx-2"></i> <span class="mx-2">Dashboard</span></a></li>
+            <li><a href="{% url 'job listing' %}"><i class="fas fa-briefcase mx-2"></i> <span class="mx-2">Jobs</span></a></li>
+            <li><a href="#"><i class="fas fa-user mx-2"></i> <span class="mx-2">Applicants</span></a></li>
+            <li><a href="#"><i class="fas fa-comments mx-2"></i> <span class="mx-1">Messages</span></a></li>
+            <!-- <li><a href="#"><i class="fas fa-calendar"></i> <span class="mx-2">Meetings</span></a></li> -->
+            <li><a href="{% url 'company_settings' %}"><i class="fas fa-cog mx-2"></i> <span class="mx-2">Settings</span></a></li>
+            <li><a href="{%url 'company_login'%}"><i class="fas fa-sign-out-alt mx-2"></i> <span class="mx-2">Logout</span></a></li>
+            <div class="sidebarFooter mt-1 text-center">
+                <div class="sidebarFooterContent mb-3"><img src="{%static 'images/contact.png'%}" class="contact" width="200px">
+                    <p class="contactMain mb-3 fw-bold">Contact Us <i class="fas fa-address-book"></i></p>
+                    <div class="contactUs">
+                        <p>tecknohow.132@gmail.com</p>
+                        <p>+91 9562766835</p>
+                    </div>
+                </div>
+            </div>
         </ul>
     </div>
 
@@ -173,7 +191,7 @@
                         <img src="{% static 'images/company_profile.jpg' %}" alt="Profile" height="25px" class="rounded-circle"> Recruiter
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
                         <li><a class="dropdown-item" href="{%url 'company_settings'%}"><i class="fas fa-cog"></i> Settings</a></li>
                         <li><a class="dropdown-item" href="{%url 'company_login'%}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
