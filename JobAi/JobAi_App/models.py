@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from fields import ComparableMixin
 
 class Jobseeker_Registration(models.Model):
     name=models.CharField(max_length=255,default="Unknown")
@@ -30,17 +31,17 @@ class jobseeker_resume(models.Model):
 
     def __str__(self):
         return f"Document uploaded by {self.user.username} on {self.uploaded_at}"
-
+class Company_Type_Master(models.Model):
+    company_type=models.CharField(max_length=50)
+    def __str__(self):
+        return self.name if self.name else "Unnamed Company"
+    
 class Company(models.Model):
     password=models.CharField(max_length=255)
     # Links to Django's built-in User model
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    company_type = models.CharField(max_length=50, choices=[
-        ('MNC', 'Multinational Company'),
-        ('Startup', 'Startup Company'),
-        ('LLC', 'Limited Liability Company')
-    ])
+    company_type = models.ForeignKey(Company_Type_Master,on_delete=models.CASCADE,default=None)
     address = models.CharField(max_length=255)
 
     def __str__(self):

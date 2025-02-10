@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'JobAi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jobai',
+        'NAME': 'jobai1',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',

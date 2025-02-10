@@ -31,7 +31,7 @@
         <h5>Jobseeker Login</h5>
       </div>
       <div class="login-wrapper my-auto">
-        <form method="post" action="{% url 'home' %}">
+        <form method="post" action="{% url 'jobseeker_login' %}">
           {% csrf_token %}
           <div class="form-group">
             <label for="email">Username</label>
@@ -60,6 +60,16 @@
     </div>
   </div>
   </div>
+  {% if messages %}
+    <div id="message-container">
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 </body>
 <script>
   function togglepwd() {
@@ -67,6 +77,14 @@
     let checkbox = document.getElementById("show_pwd");
     passwordInput.type = checkbox.checked ? "text" : "password";
   }
+  setTimeout(function() {
+        let messageContainer = document.getElementById("message-container");
+        if (messageContainer) {
+            messageContainer.style.transition = "opacity 0.5s";
+            messageContainer.style.opacity = "1"; // Fade out effect
+            setTimeout(() => messageContainer.remove(), 500); // Remove from DOM
+        }
+    }, 5000);
 </script>
 
 </html>

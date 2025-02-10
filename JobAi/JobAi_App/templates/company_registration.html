@@ -82,9 +82,9 @@
                 <label for="Company Type">Company Type</label>
                 <select id="Company_Type" name="CompanyType" class="form-control" required>
                   <option selected disabled value="">--Select Company Type--</option>
-                  <option value="MNC">Multinational Company</option>
-                  <option value="Startup">Startup Company</option>
-                  <option value="LLC">Limited Liability Company</option>
+                {% for i in company %}
+                  <option value="{{i.id}}">{{i.company_type}}</option>
+                  {% endfor %}
                 </select>
               </div>
               <div class="form-group">

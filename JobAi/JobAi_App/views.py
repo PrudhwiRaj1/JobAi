@@ -1,5 +1,5 @@
 from operator import contains
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 import os
 import re
 import json
@@ -85,7 +85,90 @@ def extract_resume_details(content):
     return details
 
 
-def read_word_document(request):
+# def read_word_document(request):
+#     content = ""
+#     alert_message=""
+#     extracted_details = None
+#     if request.method == "POST":
+#         uploaded_file = request.FILES.get("word_file")
+#         resume=request.POST.get("word_file")
+#         jobseeker_resumeobj=jobseeker_resume()
+#         jobseeker_resumeobj.resume=resume
+#         jobseeker_resumeobj.save()
+#         if uploaded_file:
+#             # Validate file extension
+#             if not uploaded_file.name.lower().endswith(('.doc', '.docx')) and not uploaded_file.name.lower().contains("Resume","CV"):
+#                 return JsonResponse({"error": "Only Resumes with .doc and .docx files are allowed."}, status=400)
+#                 return redirect("jobseeker_home")
+#             try:
+#                 # Ensure media directories exist
+#                 documents_dir = os.path.join(settings.MEDIA_ROOT, "documents")
+#                 json_dir = os.path.join(settings.MEDIA_ROOT, "json")
+#                 os.makedirs(documents_dir, exist_ok=True)
+#                 os.makedirs(json_dir, exist_ok=True)
+                
+#                 # Save the uploaded file
+#                 fs = FileSystemStorage(location=documents_dir)
+#                 file_path = fs.save(uploaded_file.name, uploaded_file)
+#                 file_path = fs.path(file_path)
+                
+#                 # Read the Word document content
+#                 document = Document(file_path)
+#                 paragraphs = [p.text for p in document.paragraphs if p.text.strip()]
+#                 content = "\n".join(paragraphs)
+               
+#                 # Extract resume details
+#                 extracted_details = extract_resume_details(content)
+#                 # resume_details = ResumeDetails.objects.create(**extracted_details)
+
+#                 # Check if essential details are missing
+#                 if not extracted_details.get("name") or not extracted_details.get("email") or not extracted_details.get("phone"):
+#                     alert_message = "*Failed to extract your resume.Check your file and try again."
+#                     jobseeker_resumeobj.delete()
+#                 else:
+#                     # Convert document to JSON and save
+#                     json_data = convert_docx_to_json(file_path, uploaded_file.name)
+#                     messages.success(request, "Resume uploaded successfully!")                    
+#             except Exception as e: 
+#                 messages.error(request, f"Error reading document: {str(e)}")
+#     return render(request, "jobseeker_home.html",{"resume_details": extracted_details,"alert_message": alert_message})
+    
+    
+
+def convert_docx_to_json(docx_path, filename):
+    """Convert a .docx file to JSON format and save it to media folder"""
+    document = Document(docx_path)
+    data = {"paragraphs": []}
+
+    for para in document.paragraphs:
+        data["paragraphs"].append(para.text)
+    
+    json_path = os.path.join(settings.MEDIA_ROOT, "json", filename + ".json")
+    
+    try:
+        with open(json_path, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+    except Exception as e:
+        print(f"Error saving JSON file: {e}")
+    
+    return json.dumps(data, indent=4)
+# Create your views here.
+
+
+def jobseeker_login(request):
+    if request.method=="POST":
+        Email=request.POST.get("email")
+        Password=request.POST.get("password")
+        try:
+            jobseeker = Jobseeker_Registration.objects.get(email=Email, password=Password)
+            messages.success(request, "Login Successfully")
+            return redirect('home')  # Redirect to a dashboard or home page after login
+        except Jobseeker_Registration.DoesNotExist:
+            messages.error(request, "Invalid Email or Password")
+    return render(request, 'jobseeker_login.html')
+
+
+def jobseeker_home(request):
     content = ""
     alert_message=""
     extracted_details = None
@@ -131,45 +214,12 @@ def read_word_document(request):
                     messages.success(request, "Resume uploaded successfully!")                    
             except Exception as e: 
                 messages.error(request, f"Error reading document: {str(e)}")
-    return render(request, "jobseeker_home.html",{"resume_details": extracted_details,"alert_message": alert_message})
-    
-    
-
-def convert_docx_to_json(docx_path, filename):
-    """Convert a .docx file to JSON format and save it to media folder"""
-    document = Document(docx_path)
-    data = {"paragraphs": []}
-
-    for para in document.paragraphs:
-        data["paragraphs"].append(para.text)
-    
-    json_path = os.path.join(settings.MEDIA_ROOT, "json", filename + ".json")
-    
-    try:
-        with open(json_path, "w") as json_file:
-            json.dump(data, json_file, indent=4)
-    except Exception as e:
-        print(f"Error saving JSON file: {e}")
-    
-    return json.dumps(data, indent=4)
-# Create your views here.
-
-
-def jobseeker_login(request):
-    if request.method=="POST":
-        Email=request.POST.get("email")
-        Password=request.POST.get("password")
-        try:
-            jobseeker = Jobseeker_Registration.objects.get(email=Email, password=Password)
-            messages.success(request, "Login Successfully")
-            return redirect('jobseeker_home')  # Redirect to a dashboard or home page after login
-        except Jobseeker_Registration.DoesNotExist:
-            messages.error(request, "Invalid Email or Password")
-    return render(request, 'jobseeker_login.html')
-
-
-def jobseeker_home(request):
-    return render(request, 'jobseeker_home.html', username(request))
+    context={
+        "resume_details": extracted_details,
+        "alert_message": alert_message,
+        "fname":'Prudhwi Raj'
+    }   
+    return render(request, "jobseeker_home.html",context)
 
 def main(request):
     return render(request, 'index.html')
@@ -236,16 +286,20 @@ def company_login(request):
     if request.method=="POST":
         Email=request.POST.get("email")
         Password=request.POST.get("password")
-        name=Company.objects.get(email=Email,password=Password)
-        
-    return render(request,'company_login.html')
+        try: 
+            company=Company.objects.get(email=Email,password=Password) 
+            messages.success(request, "Login Successfully")
+            return redirect('company_dashboard')  # Redirect to a dashboard or home page after login
+        except Company.DoesNotExist:
+            messages.error(request, "Invalid Email or Password")
+    return render(request, 'company_login.html')
 
 def company_registration(request):
     if request.method == "POST":
         name=request.POST.get('company_name')
         email=request.POST.get('email')
         password=request.POST.get('password')
-        company_type=request.POST.get('CompanyType')
+        company_type = request.POST.get("CompanyType")  # This returns a string
         company_address=request.POST.get('Address')
         # Check if a company with the same name or email already exists
         if Company.objects.filter(name=name).exists() and Company.objects.filter(email=email).exists():
@@ -256,13 +310,27 @@ def company_registration(request):
             companyobj.name=name
             companyobj.password=password
             companyobj.email=email
-            companyobj.companytype=company_type
+            companyobj.company_type_id=company_type
             companyobj.address=company_address
             companyobj.save()
             messages.success(request, "Company registered successfully!.Email will be your Username")
-            return render(request,'company_registration.html')
-    return render(request,'company_registration.html')
+            return redirect('company_registration')
+    company=Company_Type_Master.objects.all()
+    context={
+        'company':company
+    }
+    return render(request,'company_registration.html',context)
 
+def company_type(request):
+    if request.method == "POST":
+        company_type=request.POST.get('ctype')
+        company_typeobj=Company_Type_Master()
+        company_typeobj.company_type=company_type
+        company_typeobj.save()
+        messages.success(request, "Company type registered successfully!")
+        return render(request,'company_type.html')
+    return render(request,'company_type.html')
+    
 def company_forgot_password(request):
     return render(request,'company_forgot_pwd.html')
 

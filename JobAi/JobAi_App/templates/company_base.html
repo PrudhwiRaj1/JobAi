@@ -149,20 +149,20 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="brand d-flex align-items-center">
-          <center><a href="/"><img src="{% static 'images/JobAi2.png' %}" alt="JobAi" height="50px" class="mx-3" style="border-radius: 25px;"></a></center>
+          <center><a href="/"><img src="{% static 'images/JobAi2.png' %}" alt="JobAi" height="50px" class="mx-5" style="border-radius: 25px;"></a></center>
         </div>
         <ul class="sidebar-menu">
             <hr>
-            <center><img src="{%static 'images/company_profile.jpg'%}" alt="" height="65px" style="border-radius: 20px;"></center>
-            <h6 class="text-center fw-bold">Company</h6>
+            <center><img src="{%static 'images/company_profile.jpg'%}" alt="" height="85px" style="border-radius: 20px;"></center>
+            <h6 class="text-center fw-bold fs-5">Company</h6>
             <hr>
-            <li><a href="{% url 'company_dashboard' %}"><i class="fas fa-home mx-2"></i> <span class="mx-2">Dashboard</span></a></li>
-            <li><a href="{% url 'job listing' %}"><i class="fas fa-briefcase mx-2"></i> <span class="mx-2">Jobs</span></a></li>
-            <li><a href="#"><i class="fas fa-user mx-2"></i> <span class="mx-2">Applicants</span></a></li>
-            <li><a href="#"><i class="fas fa-comments mx-2"></i> <span class="mx-1">Messages</span></a></li>
+            <li class="mx-3"><a href="{% url 'company_dashboard' %}"><i class="fas fa-home mx-2"></i> <span class="mx-2">Dashboard</span></a></li>
+            <li class="mx-3"><a href="{% url 'job listing' %}"><i class="fas fa-briefcase mx-2"></i> <span class="mx-2">Jobs</span></a></li>
+            <li class="mx-3"><a href="#"><i class="fas fa-user mx-2"></i> <span class="mx-2">Applicants</span></a></li>
+            <li class="mx-3"><a href="#"><i class="fas fa-comments mx-2"></i> <span class="mx-1">Messages</span></a></li>
             <!-- <li><a href="#"><i class="fas fa-calendar"></i> <span class="mx-2">Meetings</span></a></li> -->
-            <li><a href="{% url 'company_settings' %}"><i class="fas fa-cog mx-2"></i> <span class="mx-2">Settings</span></a></li>
-            <li><a href="{%url 'company_login'%}"><i class="fas fa-sign-out-alt mx-2"></i> <span class="mx-2">Logout</span></a></li>
+            <li class="mx-3"><a href="{% url 'company_settings' %}"><i class="fas fa-cog mx-2"></i> <span class="mx-2">Settings</span></a></li>
+            <li class="mx-3"><a href="{%url 'company_login'%}"><i class="fas fa-sign-out-alt mx-2"></i> <span class="mx-2">Logout</span></a></li>
             <div class="sidebarFooter mt-1 text-center">
                 <div class="sidebarFooterContent mb-3"><img src="{%static 'images/contact.png'%}" class="contact" width="200px">
                     <p class="contactMain mb-3 fw-bold">Contact Us <i class="fas fa-address-book"></i></p>

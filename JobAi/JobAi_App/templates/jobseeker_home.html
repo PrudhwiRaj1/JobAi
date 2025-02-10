@@ -39,7 +39,7 @@
 
     <div class="container w-50 mt-4" style="margin-right: 250px;margin-left: 25px;">
         <h4 class="text-center">Upload Resume in doc,docx format</h4>
-        <form  action="../read_word_document/" method="POST" id="uploadForm" enctype="multipart/form-data">
+        <form  action="{%url 'home'%}" method="POST" id="uploadForm" enctype="multipart/form-data">
             {% csrf_token %}
 
             <input type="file" id="fileInput" name="word_file" accept=".doc,.docx" required>
@@ -54,6 +54,7 @@
             {% for message in messages %}
                 <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}" role="alert">
                     {{ message }}
+                    {{ alert_message }}
                 </div>
             {% endfor %}
         </div>
