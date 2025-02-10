@@ -2,39 +2,6 @@
 {% load static %}
 {%block content%}
 
-<div class="main-content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{%static 'images/profile.jpeg'%}" class="rounded-circle" alt="Profile"
-                                height="50px" />
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <div>
-                                <a href="{%url 'support' %}" class="nav-link fw-bold">
-                                    <li><i class="fa-solid fa-comment"></i> &emsp;Support</li>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="{%url 'user-type' %}" class="nav-link fw-bold">
-                                    <li><i class="fas fa-sign-out-alt"></i> &emsp;Logout
-                                    </li>
-                                </a>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <h2 id="profile">Profile</h2><br><br>
 
     <div class="container w-50 mt-4" style="margin-right: 250px;margin-left: 25px;">
