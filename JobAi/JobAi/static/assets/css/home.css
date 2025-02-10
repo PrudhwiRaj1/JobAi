@@ -230,9 +230,9 @@ textarea
 {
     resize: none;
 }
-#edit:hover
+.edit-button:hover
 {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: black;
 }
 .input-bg:read-only{
     background-color: #ccc9c9; /* Light gray when readonly */
