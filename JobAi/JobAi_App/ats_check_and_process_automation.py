@@ -243,6 +243,8 @@ We regret to inform you that your application for the position of {application.c
 
 We encourage you to improve your resume and apply for future opportunities with us.
 
+Also wait for further mails as some times(depends on some criteria and company decision ) even the rejected list may also considered to next level.
+
 Wishing you all the best in your job search!
 
 Best Regards,  
