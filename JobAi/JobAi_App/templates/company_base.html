@@ -42,43 +42,54 @@
         }
 
         .sidebar {
-    width: 260px; /* Set a fixed width to prevent shrinking */
-    min-width: 260px; /* Ensures it doesn't shrink on smaller screens */
-    min-height: 120vh;
-    background: var(--sidebar-bg);
-    color: white;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    padding-top: 1px;
-    position: fixed;
-}
+            width: 260px;
+            /* Set a fixed width to prevent shrinking */
+            min-width: 260px;
+            /* Ensures it doesn't shrink on smaller screens */
+            min-height: 120vh;
+            background: var(--sidebar-bg);
+            color: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding-top: 1px;
+            position: fixed;
+        }
 
-.main-content {
-    margin-left: 260px;
-    width: calc(100% - 260px); /* Adjust width dynamically */
-    transition: all 0.3s ease-in-out;
-}
+        .main-content {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            /* Adjust width dynamically */
+            transition: all 0.3s ease-in-out;
+        }
 
-/* Responsive Fix */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 260px; /* Keep width stable */
-        min-width: 260px;
-    }
+        /* Responsive Fix */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 260px;
+                /* Keep width stable */
+                min-width: 260px;
+            }
 
-    .main-content {
-        margin-left: 260px; /* Maintain proper spacing */
-        width: calc(100% - 260px);
-    }
-}
-h1,h2,h3,h4,h5,h6
-{
-    color: blue;
-}
-.sidebar
-{
-padding-right: 5px;
-padding-bottom: 5px;
-}
+            .main-content {
+                margin-left: 260px;
+                /* Maintain proper spacing */
+                width: calc(100% - 260px);
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: blue;
+        }
+
+        .sidebar {
+            padding-right: 5px;
+            padding-bottom: 5px;
+        }
+
         .sidebar .brand {
             display: flex;
             align-items: center;
@@ -110,10 +121,11 @@ padding-bottom: 5px;
             border-radius: 8px;
             transition: 0.3s;
         }
-   .jobs_sub.active
-   {
-    transition: rotate(180deg);
-   }
+
+        .jobs_sub.active {
+            transition: rotate(180deg);
+        }
+
         .sidebar-menu a:hover,
         .sidebar-menu a.active {
             background-color: var(--hover-bg);
@@ -268,35 +280,42 @@ padding-bottom: 5px;
             <h6 class="text-center text-white mt-1 fw-bold fs-5">{{cname}}</h6>
             <li class="fw-bold mx-3 mt-4"><a href="{% url 'company_dashboard' %}"><i class="fas fa-home mx-2"></i> <span
                         class="mx-2">Dashboard</span></a></li>
-                        <li class="fw-bold mx-3">
-                            <!-- Jobs Dropdown -->
-                            <a href="#" data-bs-toggle="collapse" data-bs-target="#jobsDropdown" aria-expanded="false" aria-controls="jobsDropdown">
-                                <i class="fas fa-briefcase mx-2"></i> <span class="mx-2">Jobs</span><i class="fas fa-chevron-down ms-auto jobs_sub"></i>
-                            </a>
-                            <ul class="collapse" id="jobsDropdown">
-                                <li style="list-style-type: none;"><a href="{% url 'Post Job' %}" class="mx-3"><i class="fas fa-plus-square me-auto"></i><span class="mx-2">Post Jobs</span></a></li>
-                                <li style="list-style-type: none;"><a href="{% url 'job_listing' %}" class="mx-3"><i class="fas fa-clipboard-list me-auto"></i> <span class="ms-2">   Job Listing</span></a></li>
-                            </ul>
-                        </li>
-                        
+            <li class="fw-bold mx-3">
+                <!-- Jobs Dropdown -->
+                <a href="#" data-bs-toggle="collapse" data-bs-target="#jobsDropdown" aria-expanded="false"
+                    aria-controls="jobsDropdown">
+                    <i class="fas fa-briefcase mx-2"></i> <span class="mx-2">Jobs</span><i
+                        class="fas fa-chevron-down ms-auto jobs_sub"></i>
+                </a>
+                <ul class="collapse" id="jobsDropdown">
+                    <li style="list-style-type: none;"><a href="{% url 'Post Job' %}" class="mx-3"><i
+                                class="fas fa-plus-square me-auto"></i><span class="mx-2">Post Jobs</span></a></li>
+                    <li style="list-style-type: none;"><a href="{% url 'job_listing' %}" class="mx-3"><i
+                                class="fas fa-clipboard-list me-auto"></i> <span class="ms-2"> Job Listing</span></a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="fw-bold mx-3"><a href="{%url 'job_applications'%}"><i class="fas fa-user mx-2"></i> <span
                         class="mx-2">Applications</span></a></li>
             <li class="fw-bold mx-3"><a href="{%url 'candidates' %}"><i class="fas fa-list-check mx-2"></i><span
                         class="ps-2">Candidates</span></a></li>
             <li class="fw-bold mx-3"><a href="{%url 'rejected' %}"><i class="fas fa-times-circle mx-2"></i><span
-                            class="ps-2">Rejected List</span></a></li>
+                        class="ps-2">Rejected List</span></a></li>
             <li class="fw-bold mx-3"><a href="{% url 'company_settings' %}"><i class="fas fa-cog mx-2"></i> <span
                         class="mx-2">Settings</span></a></li>
-        
-        <li class="fw-bold mx-2 pb-2">
-            <a href="tel:+919562766835" class="text-decoration-none text-white fw-bold"><p class="contactMain mb-1 fw-bold mt-2 ps-3"><i class="fas fa-address-book"></i>  Contact JobAi</p>
-            <div class="sidebarFooterContent"><img src="{%static 'images/contact.png'%}" class="contact"
-                    width="200px"></a>
+
+            <li class="fw-bold mx-2 pb-2">
+                <a href="mailto:jobai.prksolutions@gmail.com" class="text-decoration-none text-white fw-bold">
+                    <p class="contactMain mb-1 fw-bold mt-2 ps-3"><i class="fas fa-address-book"></i> Contact JobAi</p>
+                </a>
+                <div class="sidebarFooterContent"><img src="{%static 'images/contact.png'%}" class="contact"
+                        width="200px">
 
 
-            </div>
-        </li>
-    </ul>
+                </div>
+            </li>
+        </ul>
     </div>
 
     <!-- Main Content -->
@@ -312,29 +331,35 @@ padding-bottom: 5px;
             </div>
 
             <div class="d-flex align-items-center">
-                    <div class="d-flex align-items-center">
-                        <button class="btn btn-light me-3 position-relative" onclick="toggleNotifications()">
-                            <i class="fas fa-bell"></i>
-                            {% if notific_count > 0 %}
-                            <span id="notification-count" class="badge bg-danger position-absolute top-0 start-100 translate-middle">{{ notific_count }}</span>
-                            {% endif %}
-                        </button>
-                <a href="{% url 'Post Job' %}"><button class="btn btn-light me-3 fw-bold"><i class="fas fa-plus-square"></i> Post Jobs</button></a>
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <img src="{{compdt.profile_img.url}}" alt="Profile" height="25px" class="rounded-circle">
-                        {{cname}}
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-light me-3 position-relative" onclick="toggleNotifications()">
+                        <i class="fas fa-bell"></i>
+                        {% if notific_count > 0 %}
+                        <span id="notification-count"
+                            class="badge bg-danger position-absolute top-0 start-100 translate-middle">{{ notific_count
+                            }}</span>
+                        {% endif %}
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item fw-bold" href="{%url 'company_ch_pwd'%}"><i
-                                    class="fas fa-pencil"></i>
-                                Change Password</a></li>
-                        <li><a class="dropdown-item fw-bold" href="{%url 'company_logout'%}"><i
-                                    class="fas fa-sign-out-alt"></i>
-                                Logout</a></li>
-                    </ul>
+                    <a href="{% url 'Post Job' %}"><button class="btn btn-light me-3 fw-bold"><i
+                                class="fas fa-plus-square"></i> Post Jobs</button></a>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <img src="{{compdt.profile_img.url}}" alt="Profile" height="25px" class="rounded-circle">
+                            {{cname}}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item fw-bold" href="{%url 'company_ch_pwd'%}"><i
+                                        class="fas fa-pencil"></i>
+                                    Change Password</a></li>
+                            <li><a class="dropdown-item fw-bold" href="{%url 'company_settings'%}"><i
+                                        class="fas fa-gear"></i>
+                                    Settings</a></li>
+                            <li><a class="dropdown-item fw-bold" href="{%url 'company_logout'%}"><i
+                                        class="fas fa-sign-out-alt"></i>
+                                    Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
         </nav>
         {% block content %}
         <!-- Page Content Goes Here -->
@@ -344,37 +369,37 @@ padding-bottom: 5px;
 
     <!-- Bootstrap 5 JS (Ensure It's Loaded Once) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    window.addEventListener('load', toggleScrollTop);
-	document.addEventListener('scroll', toggleScrollTop);
-	document.querySelectorAll('.jobs_sub').forEach(header => {
-		header.addEventListener('click', function () {
-			const parent = this.parentElement;
-			const isActive = parent.classList.contains('active');
-			document.querySelectorAll('.collapse').forEach(item => {
-				item.classList.remove('active');
-			});
-			if (!isActive) {
-				parent.classList.add('active');
-			}
-		});
-	});
-    function checkScreenWidth()
-    {
-        const warningMessage = document.getElementById('warningMessage');
-     if (window.innerWidth < 790) {
-            // Redirect to another page if screen width is smaller than 900px
-            document.body.style.display = 'none';  // Redirect to the "not available" page
-        } else {
-            // If screen width is valid, show the page content
-            document.body.style.display = 'block';  // Show page content
+    <script>
+        window.addEventListener('load', toggleScrollTop);
+        document.addEventListener('scroll', toggleScrollTop);
+        document.querySelectorAll('.jobs_sub').forEach(header => {
+            header.addEventListener('click', function () {
+                const parent = this.parentElement;
+                const isActive = parent.classList.contains('active');
+                document.querySelectorAll('.collapse').forEach(item => {
+                    item.classList.remove('active');
+                });
+                if (!isActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+        function checkScreenWidth() {
+            const warningMessage = document.getElementById('warningMessage');
+            if (window.innerWidth < 790) {
+                // Redirect to another page if screen width is smaller than 900px
+                document.body.style.display = 'none';  // Redirect to the "not available" page
+            } else {
+                // If screen width is valid, show the page content
+                document.body.style.display = 'block';  // Show page content
+            }
         }
-    }
         // Run the check on page load
         checkScreenWidth();
 
         // Add an event listener to check when the window is resized
         window.addEventListener('resize', checkScreenWidth);
-</script>
+    </script>
 </body>
+
 </html>

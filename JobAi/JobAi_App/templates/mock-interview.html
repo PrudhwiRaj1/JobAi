@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
     .how-it-works {
         text-align: center;
         padding: 40px 20px;
     }
+
+    .start-interview:hover {
+        color: blue;
+    }
+    .start-interview {
+        color: white;
+    }
+
+
     .card-container {
         display: grid;
         grid-template-columns: repeat(2, minmax(250px, 1fr));
@@ -13,6 +23,18 @@
         justify-content: center;
         padding: 20px;
     }
+
+    .quoted-text {
+        color: brown;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    h6,
+    #how-it-works {
+        color: blue;
+    }
+
     .card {
         background: #fff;
         border-radius: 10px;
@@ -21,120 +43,201 @@
         text-align: center;
         transition: transform 0.3s ease-in-out;
     }
+
     .card:hover {
         transform: scale(1.05);
     }
+
     .card img {
         width: 80px;
         height: 80px;
         margin-bottom: 15px;
     }
+
+    video,
+    canvas {
+        display: block;
+        margin: 0 auto;
+    }
 </style>
 <div class="main-content">
     <h4 id="profile">AI Mock Interview</h4>
-    <h6 class="text-dark mt-3 fs-5  ms-5">Start Practicing with Technical Mock Interview Questions.Note down the Questions for further preparation </h6>
-  
-    <div class="ms-5 mt-3 container" style="margin-top: 5px;box-shadow:0 2px 4px rgba(0, 0, 0, 0.1);width: 90%;">
-        <div class="cover-letter-generator coverletterbox  bg-white" style="margin-bottom: 20px;border-radius: 5px;box-shadow: none;">
-            <div class="formcoverletter">
-                <form class="formcover" method="POST">
-                    {% csrf_token %}
-                    <div class="coverletterformdiv">
-                           <div class="row mt-4">
-                            <div class="col-lg-6">
-                                <div class="coverletterinputblock form-group ms-3">
-                                   <label class="form-label ms-1 text-dark">Job Position</label><span class="text-danger mx-2">*</span>
-                                     <select id="jobTitleSelect" class="form-control ms-2" name="job_title" required>
-                                        <option value="" selected disabled>--Choose Job Position---</option>
-                                        {% for i in job %}
-                                        <option value="{{ i.id }}">{{ i.job_title }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
+    <h6 class="text-dark mt-3 fs-5  ms-5">Begin your practice session with our technical mock interview questions. <br>
+    </h6>
+    <div class="container shadow-sm bg-white p-4 rounded mt-3">
+        <b>Follow Instructions: </b><br>
+        <ol>
+            <li>Note
+                down the
+                Questions for further preparation. </li>
+            <li>Ensure you sit upright with your face directly facing the camera for the best
+                practice.</li>
+        </ol>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label text-dark fw-bold">Job Position <span class="text-danger">*</span></label>
+                    <select id="jobTitleSelect" class="form-control w-150" name="job_title" required>
+                        <option value="" selected disabled>--Choose Job Position--</option>
+                        {% for i in job %}
+                        <option value="{{ i.id }}">{{ i.job_title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-                            <!-- Button to Start Mock Interview -->
-                            <button type="button" class="btn btn-success ms-5 ps-5 mt-3 w-50" data-bs-toggle="modal"
-                                data-bs-target="#mockInterviewModal">
-                                <i class="fas fa-microphone"></i> Start AI Mock Interview
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                <div class="col-md-6 d-flex align-items-end">
+                    <button type="button" class="btn btn-success btn-custom" data-bs-toggle="modal"
+                        data-bs-target="#mockInterviewModal" style="margin-right: 50px;left: 0px;"
+                        onclick="startCamera()">
+                        <i class="fas fa-microphone"></i> Start AI Mock Interview
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Interview Questions Modal -->
+<div class="modal fade" id="mockInterviewModal" tabindex="-1" aria-labelledby="mockInterviewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Mock Interview</h5>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <h5 id="questionText" class="text-dark mt-3">Click 'Start Interview' to begin and wait ...</h5>
+                <textarea id="answerInput" class="form-control mt-3 text-dark"
+                    placeholder="Type your answer"></textarea>
+                <button class="btn btn-primary mt-3" id="toggleRecording"><i class="fas fa-microphone"></i> Record
+                    Answer</button>
+            </div>
+            <div class="modal-footer">
+                <i class="bg-white text-white bi bi-volume-up-fill" id="speaker" style="width: 10px;"></i>
+                <script>
+                    // Function to convert text to speech
+                    function textToSpeech(text) {
+
+                        if (!window.speechSynthesis) {
+                            alert("Speech Synthesis API is not supported in your browser.");
+                            return;
+                        }
+
+                        let questionText = document.getElementById("questionText").innerText.trim();
+
+                        // Remove common numbering formats like "1. ", "Q1: ", "1)", etc.
+                        questionText = questionText.replace(/^(Q?\d+[\.\):]?\s*)/, "");
+
+                        if (!questionText) {
+                            alert("No valid text to speak!");
+                            return;
+                        }
+
+                        const speech = new SpeechSynthesisUtterance(questionText);
+                        speech.lang = "en-in";
+                        speech.rate = 1.4;
+                        speech.pitch = 0.9;
+
+                        // Stop any ongoing speech before speaking
+                        window.speechSynthesis.cancel();
+                        window.speechSynthesis.speak(speech);
+                    }
+                    function autoSpeakNewQuestion() {
+                        let observer = new MutationObserver(() => {
+                            document.getElementById("speaker").click();
+                        });
+
+                        observer.observe(document.getElementById("questionText"), { childList: true, subtree: true });
+                    }
+
+                    // Attach event listener to the volume button
+                    document.getElementById("speaker").addEventListener("click", textToSpeech);
+                    const modal = document.getElementById("mockInterviewModal")
+                    document.getElementById('mockInterviewModal').addEventListener('hidden.bs.modal', () => {
+                        window.speechSynthesis.cancel();
+                        stopCamera();
+                    });
+                    // Start observing question changes
+                    autoSpeakNewQuestion();
+                </script>
+                <button type="button" class="btn btn-info fw-bold start-interview" id="startInterview">Start
+                    Interview</button>
+                <span class="btn btn-danger text-white bi bi-camera-video-fill" id="startcam"> Allow Camera</span>
+                <button type="button" class="btn btn-success fw-bold" id="submitAnswer">Submit Answer</button>
+            </div>
+            <video id="video" width="290" height="200" autoplay class="mt-3"></video>
+            <canvas id="overlay" width="290" height="200"></canvas>
+            <p id="status" style="text-align:center; font-size:20px;"></p>
+
+        </div>
+    </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Interview Feedback</h5>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+                <p id="feedbackText" class="text-dark"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-
-    <!-- Interview Questions Modal -->
-    <div class="modal fade" id="mockInterviewModal" tabindex="-1" aria-labelledby="mockInterviewModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">AI Mock Interview</h5>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body">
-                    <h5 id="questionText" class="text-dark mt-3">Click 'Start Interview' to begin and wait ...</h5>
-                    <textarea id="answerInput" class="form-control mt-3 text-dark"
-                        placeholder="Type your answer"></textarea>
-                        <button class="btn btn-primary mt-3" id="toggleRecording"><i class="fas fa-microphone"></i> Record Answer</button>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <button type="button" class="btn btn-info" id="startInterview">Start Interview</button>
-                    <button type="button" class="btn btn-success" id="submitAnswer">Submit Answer</button>
-                </div>
-            </div>
+</div>
+<div class="how-it-works">
+    <span class="fs-3 fw-bold" id="how-it-works">How It Works?</span>
+    <div class="card-container">
+        <div class="card">
+            <h6>Select a Job Position</h6>
+            <p>Choose the role you are applying for to get relevant interview questions.</p>
+        </div>
+        <div class="card">
+            <h6>Start the Mock Interview</h6>
+            <p>Click on '<span class="quoted-text">Start AI Mock Interview</span>' to generate questions.</p>
+        </div>
+        <div class="card">
+            <h6>Click Start Interview Button </h6>
+            <p>Click on '<span class="quoted-text">Start Interview</span>' Button to start interview.</p>
+        </div>
+        <div class="card">
+            <h6>Answer the Questions</h6>
+            <p>Either type your answer or use the voice recording feature.</p>
+        </div>
+        <div class="card">
+            <h6>Receive AI Feedback</h6>
+            <p>Get AI-driven feedback with evaluation, sample answers, and improvement suggestions.</p>
         </div>
     </div>
-
-    <!-- Feedback Modal -->
-    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">AI Interview Feedback</h5>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
-                </div>
-                <div class="modal-body">
-                    <p id="feedbackText" class="text-dark"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+</div>
+</div>
+<div class="modal fade" id="recordedVideoModal" tabindex="-1" aria-labelledby="recordedVideoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Recorded Interview <br>
+                <span class="fs-6 text-dark">You can download it for further improvement</span></h5>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
             </div>
-        </div>
-    </div>
-    <div class="how-it-works">
-        <span class="fs-3 fw-bold">How It Works?</span>
-        <div class="card-container">
-            <div class="card">
-                <h6>Select a Job Position</h6>
-                <p>Choose the role you are applying for to get relevant interview questions.</p>
-            </div>
-            <div class="card">
-                <h6>Start the Mock Interview</h6>
-                <p>Click on "Start AI Mock Interview" to generate questions.</p>
-            </div> <div class="card">
-                <h6>Click Start  Interview Button </h6>
-                <p>Click on "Start Interview" Button to start interview.</p>
-            </div>
-            <div class="card">
-                <h6>Answer the Questions</h6>
-                <p>Either type your answer or use the voice recording feature.</p>
-            </div>
-            <div class="card">
-                <h6>Receive AI Feedback</h6>
-                <p>Get AI-driven feedback with evaluation, sample answers, and improvement suggestions.</p>
+            <div class="modal-body">
+                <video id="recordedVideo" width="100%" controls></video>
             </div>
         </div>
     </div>
 </div>
 
+
+
 <!-- JavaScript for Handling Interview Logic -->
 <script>
-   let currentQuestionIndex = 0;
+    let currentQuestionIndex = 0;
     let questions = [];
     let recognition;
     let isRecording = false;
@@ -147,14 +250,14 @@
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
 
-        recognition.onresult = function(event) {
+        recognition.onresult = function (event) {
             const transcript = event.results[0][0].transcript;
             // Append the recognized text to the textarea
             const answerInput = document.getElementById("answerInput");
             answerInput.value += transcript + " ";
         };
 
-        recognition.onerror = function(event) {
+        recognition.onerror = function (event) {
             console.error("Speech recognition error:", event.error);
             alert("Error during speech recognition: " + event.error);
         };
@@ -188,7 +291,7 @@
         questions = [];
         document.getElementById("questionText").innerText = "Fetching questions, please wait...";
         document.getElementById("answerInput").value = "";
-        document.getElementById("startInterview").style.display = "none"; 
+        document.getElementById("startInterview").style.display = "none";
         document.getElementById("submitAnswer").style.display = "block";
 
         fetch("{% url 'mock-interview' %}", {
@@ -199,13 +302,13 @@
             },
             body: new URLSearchParams({ "job_title": jobTitle })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.questions) {
-                questions = data.questions;
-                document.getElementById("questionText").innerText = questions[currentQuestionIndex];
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.questions) {
+                    questions = data.questions;
+                    document.getElementById("questionText").innerText = questions[currentQuestionIndex];
+                }
+            });
     });
 
     document.getElementById("submitAnswer").addEventListener("click", function () {
@@ -224,35 +327,35 @@
             },
             body: new URLSearchParams({ "job_title": jobTitle, "answer": answer })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.feedback) {
-                document.getElementById("feedbackText").innerText = data.feedback;
-                let feedbackModal = new bootstrap.Modal(document.getElementById("feedbackModal"));
-                feedbackModal.show();
-            }
-
-            // Move to the next question
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                document.getElementById("questionText").innerText = questions[currentQuestionIndex];
-                document.getElementById("answerInput").value = "";
-            } else {
-                let interviewModal = bootstrap.Modal.getInstance(document.getElementById("mockInterviewModal"));
-                interviewModal.hide();
-
-                setTimeout(() => {
+            .then(response => response.json())
+            .then(data => {
+                if (data.feedback) {
+                    document.getElementById("feedbackText").innerText = data.feedback;
                     let feedbackModal = new bootstrap.Modal(document.getElementById("feedbackModal"));
                     feedbackModal.show();
-                }, 500);
+                }
 
-                // Reset interview state for next time
-                setTimeout(() => {
-                    document.getElementById("startInterview").style.display = "block"; 
-                    document.getElementById("submitAnswer").style.display = "none";
-                }, 100);
-            }
-        });
+                // Move to the next question
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    document.getElementById("questionText").innerText = questions[currentQuestionIndex];
+                    document.getElementById("answerInput").value = "";
+                } else {
+                    let interviewModal = bootstrap.Modal.getInstance(document.getElementById("mockInterviewModal"));
+                    interviewModal.hide();
+
+                    setTimeout(() => {
+                        let feedbackModal = new bootstrap.Modal(document.getElementById("feedbackModal"));
+                        feedbackModal.show();
+                    }, 500);
+
+                    // Reset interview state for next time
+                    setTimeout(() => {
+                        document.getElementById("startInterview").style.display = "block";
+                        document.getElementById("submitAnswer").style.display = "none";
+                    }, 100);
+                }
+            });
     });
 
     // Fix shadow issue when closing modal
@@ -267,6 +370,123 @@
             });
         });
     });
+
+    const video = document.getElementById('video');
+    const overlay = document.getElementById('overlay');
+    const ctx = overlay.getContext('2d');
+    const statusText = document.getElementById('status');
+    const startButton = document.getElementById('startcam');
+
+    let warningCount = 0;
+    const maxWarnings = 3;
+    let mediaRecorder;
+    let recordedChunks = [];
+    let videoStream;
+
+    // Start Camera when the modal is shown
+    document.getElementById("mockInterviewModal").addEventListener("shown.bs.modal", async function () {
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: {
+                echoCancellation: true,   // Reduce echo for better clarity
+                noiseSuppression: true,   // Remove background noise
+                autoGainControl: true,    // Adjust microphone sensitivity
+                sampleRate: 48000,        // Higher sample rate for better clarity
+                channelCount: 1           // Use mono channel to avoid unnecessary noise
+            } });
+            document.getElementById("video").srcObject = videoStream;
+
+            // Initialize MediaRecorder for recording
+            recordedChunks = [];
+            mediaRecorder = new MediaRecorder(videoStream);
+
+            mediaRecorder.ondataavailable = function (event) {
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = function () {
+                const recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+                const recordedVideo = document.getElementById("recordedVideo");
+                recordedVideo.src = URL.createObjectURL(recordedBlob);
+            };
+
+            // Start recording
+            mediaRecorder.start();
+        } catch (error) {
+            console.error("Error accessing camera:", error);
+            alert("Please allow camera access to continue.");
+        }
+    });
+
+    // Stop Camera and Show Recorded Video when modal closes
+    document.getElementById("mockInterviewModal").addEventListener("hidden.bs.modal", function () {
+        if (videoStream) {
+            videoStream.getTracks().forEach(track => track.stop());
+        }
+
+        // Stop recording
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+            mediaRecorder.stop();
+        }
+
+        // Show recorded video modal
+        setTimeout(() => {
+            let recordedVideoModal = new bootstrap.Modal(document.getElementById("recordedVideoModal"));
+            recordedVideoModal.show();
+        }, 500);
+    });
+
+    async function startCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            video.style.display = "block"; // Show video only after permission is granted
+            startButton.style.display = "none"; // Hide start button
+            return new Promise(resolve => {
+                video.onloadedmetadata = () => {
+                    video.play();
+                    resolve();
+                };
+            });
+        } catch (error) {
+            alert("Error accessing camera. Please enable permissions.");
+            console.error("Camera access error:", error);
+        }
+    }
+
+    function stopCamera() {
+        let stream = document.querySelector('video')?.srcObject;
+        if (stream) {
+            let tracks = stream.getTracks();
+            tracks.forEach(track => track.stop()); // Stop each track
+            document.querySelector('video').srcObject = null;
+        }
+    }
+
+    $('#mockInterviewModal').on('hidden.bs.modal', function () {
+        stopCamera();
+    });
+
+    $('#recordedVideoModal').on('hidden.bs.modal', function () {
+        setTimeout(() => location.reload(true), 500);
+    });
+
+
+
+
+    document.getElementById("mockInterviewModal").addEventListener("shown.bs.modal", async function () {
+        videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        document.getElementById("video").srcObject = videoStream;
+    });
+
+    document.getElementById("mockInterviewModal").addEventListener("hidden.bs.modal", function () {
+        if (videoStream) {
+            videoStream.getTracks().forEach(track => track.stop());
+        }
+        document.getElementById("recordedVideoModal").modal("show");
+    });
+
 
 </script>
 

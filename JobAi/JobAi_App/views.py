@@ -21,6 +21,7 @@ from itertools import groupby
 from django.core.mail.message import EmailMessage
 import tempfile
 from django.utils.timezone import now
+import json
 
 openai.api_key = settings.OPENAI_API_KEY
 
@@ -1034,6 +1035,13 @@ def mark_notifications_as_read(request):
     JobNotification.objects.filter(jobseeker_id=jobseeker_id, is_read=False).update(is_read=True)
 
     return JsonResponse({"message": "Notifications marked as read."})
+
+def mark_notification_as_read(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        notification_id = data.get("id")
+        JobNotification.objects.filter(id=notification_id).update(is_read=True)
+        return JsonResponse({"success": True})
 
 def company_postjob(request):
     job = job_title.objects.all()

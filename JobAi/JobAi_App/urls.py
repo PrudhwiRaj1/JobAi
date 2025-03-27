@@ -34,6 +34,7 @@ urlpatterns = [
     path('jobs/',views.jobs,name="jobs"),
     path('candidates/',views.candidates,name="candidates"),
     path('rejected/',views.rejected,name="rejected"),
+    path('notification1/',views.mark_notification_as_read,name="mark_notification_as_read"),
     # path("check-ats-score/<int:application_id>/",views.check_ats_compatibility, name="check_ats_score"),
     path("auto-process-application/<int:application_id>/",views.auto_process_application, name="auto_process_application"),
     path('Post_Job/',views.company_postjob,name="Post Job"),
