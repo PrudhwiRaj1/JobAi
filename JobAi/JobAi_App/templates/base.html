@@ -24,14 +24,18 @@
     .main-content {
         background-color: rgb(238, 247, 250);
     }
-    #profile
-    {
+
+    #profile {
         margin-top: 15px;
     }
-h2,h3,h4,h5
-{
-    color: blue;
-}
+
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: blue;
+    }
+
     .container,
     .container1 {
         width: 85%;
@@ -41,6 +45,51 @@ h2,h3,h4,h5
     .dropdown1 .dropdown-toggle::after {
         display: none;
     }
+
+
+    .dropdown li a {
+        color: #888;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    /* Ensure dropdowns do not overlap and are positioned correctly */
+    .dropdown-menu {
+        position: absolute !important;
+        right: 0;
+        left: auto;
+        z-index: 1050;
+        width: 250px;
+       
+    }
+
+    /* Prevent dropdowns from being cut off inside navbar */
+    .navbar .dropdown-menu {
+        top: 100% !important;
+        margin-top: 5px;
+        /* Small gap for better UI */
+    }
+
+    /* Fix notification dropdown visibility */
+    #notification-dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 40px;
+        /* Adjust to prevent overlap */
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-menu .notification-list {
+        width: 350px;
+    }
+
+    #notification-dropdown {
+        width: 370px;
+    }
+
 
     .dropdown1 button {
         border-radius: 5px;
@@ -95,6 +144,7 @@ h2,h3,h4,h5
                         <li><i class="fa-solid fa-bolt"></i> &emsp;Auto Apply</li>
                     </a>
                 </div>
+        
                 <div class="box" onclick="select(this)">
                     <a href="{%url 'support' %}" class="nav-link fw-bold">
                         <li><i class="fa-solid fa-headset"></i> &emsp;Support</li>
@@ -111,8 +161,10 @@ h2,h3,h4,h5
                         width="200px">
                     <p class="contactMain mb-1 fw-bold">Contact Us <i class="fas fa-address-book"></i></p>
                     <div class="contactUs">
-                        <p class="text-center"><a href="mailto:jobai.prksolutions@gmail.com" class="text-decoration-none text-white">jobai.prksolutions@gmail.com</a> <br>
-                            <a href="tel:+919562766835" class="text-decoration-none text-white">+91 9562766835</a></p>
+                        <p class="text-center"><a href="mailto:jobai.prksolutions@gmail.com"
+                                class="text-decoration-none text-white">jobai.prksolutions@gmail.com</a> <br>
+                            <a href="tel:+919562766835" class="text-decoration-none text-white">+91 9562766835</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -123,8 +175,8 @@ h2,h3,h4,h5
             <nav class="navbar d-flex justify-content-between container-fluid" position="sticky">
                 <div class="menu d-none d-md-flex">
                     <div class="brand d-flex align-items-center">
-                        <center><a><img src="{% static 'images/JobAi2.png' %}" alt="JobAi"
-                                    height="50px" class="mx-3" style="border-radius: 25px;"></a></center>
+                        <center><a><img src="{% static 'images/JobAi2.png' %}" alt="JobAi" height="50px" class="mx-3"
+                                    style="border-radius: 25px;"></a></center>
                     </div>
                 </div>
 
@@ -141,9 +193,8 @@ h2,h3,h4,h5
                             </span>
                         </button>
                         <!-- Notification Dropdown -->
-                        <div class="dropdown-menu dropdown-menu-end ps-2 ms-1" id="notification-dropdown"
-                            style="display: none; width: 240px;margin: 18px;">
-                            <div id="notifications-list">
+                        <div class="dropdown-menu dropdown-menu-end p-2 ms-1" id="notification-dropdown">
+                            <div id="notifications-list" class="notification-list">
                                 {%if notifications %}
                                 {{ notifications }} {{ created_at }}
                                 {%else%}
@@ -151,7 +202,7 @@ h2,h3,h4,h5
                                 {%endif%}
                             </div>
                             <hr>
-                            <button class="btn-square btn-primary w-75" id="mark-read-btn">Mark all as read</button>
+                            <button class="btn-square btn-primary w-100" id="mark-read-btn">Mark all as read</button>
                         </div>
                     </div>
                     <div class="dropdown dropdown2">
@@ -165,7 +216,7 @@ h2,h3,h4,h5
                                 class="rounded-circle">
                             {%endif%} {{ fname }}
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
+                        <ul class="dropdown-menu dropdown-menu-end w-100">
                             <li><a class="dropdown-item fw-bold" href="{%url 'j_change_pwd' %}"><i
                                         class="fas fa-pencil"></i> Change Password</a></li>
                             <li><a class="dropdown-item fw-bold" href="{%url 'support'%}"><i
@@ -183,69 +234,69 @@ h2,h3,h4,h5
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    const notificationBtn = document.getElementById("notification-btn");
-    const notifDropdown = document.getElementById("notification-dropdown");
-    const notificationsList = document.getElementById("notifications-list");
-    const notifCount = document.getElementById("notif-count");
-    const markReadBtn = document.getElementById("mark-read-btn");
+        const notificationBtn = document.getElementById("notification-btn");
+        const notifDropdown = document.getElementById("notification-dropdown");
+        const notificationsList = document.getElementById("notifications-list");
+        const notifCount = document.getElementById("notif-count");
+        const markReadBtn = document.getElementById("mark-read-btn");
 
-    // Toggle dropdown on bell icon click
-    notificationBtn.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevents the click from bubbling up
-        notifDropdown.style.display = notifDropdown.style.display === "none" ? "block" : "none";
-        fetchNotifications();
-    });
+        // Toggle dropdown on bell icon click
+        notificationBtn.addEventListener("click", function (event) {
+            event.stopPropagation(); // Prevents the click from bubbling up
+            notifDropdown.style.display = notifDropdown.style.display === "none" ? "block" : "none";
+            fetchNotifications();
+        });
 
-    // Fetch notifications from backend
-    function fetchNotifications() {
-        fetch("{% url 'jobseeker_notifications' %}")
-            .then(response => response.json())
-            .then(data => {
-                let notifData = data.notifications;
-                let notifHTML = "";
+        // Fetch notifications from backend
+        function fetchNotifications() {
+            fetch("{% url 'jobseeker_notifications' %}")
+                .then(response => response.json())
+                .then(data => {
+                    let notifData = data.notifications;
+                    let notifHTML = "";
 
-                if (notifData.length > 0) {
-                    notifData.forEach(n => {
-                        notifHTML += `<div class="notification-item border-bottom p-2">
+                    if (notifData.length > 0) {
+                        notifData.forEach(n => {
+                            notifHTML += `<div class="notification-item border-bottom p-2">
                             <p class="mb-1 fw-bold">${n.job_title} at ${n.company_name}</p>
                             <small class="text-muted">${n.created_at}</small>
                         </div>`;
-                    });
-                } else {
-                    notifHTML = "<p class='text-center'>No new notifications</p>";
-                }
+                        });
+                    } else {
+                        notifHTML = "<p class='text-center'>No new notifications</p>";
+                    }
 
-                notificationsList.innerHTML = notifHTML;
-                notifCount.innerText = notifData.length;
-                notifCount.style.display = notifData.length > 0 ? "inline-block" : "none";
-            })
-            .catch(error => console.error("Error fetching notifications:", error));
-    }
-
-    // Mark all notifications as read
-    markReadBtn.addEventListener("click", function () {
-        fetch("{% url 'mark_notifications_as_read' %}", {
-            method: "POST",
-            headers: { "X-CSRFToken": "{{ csrf_token }}" },
-        })
-        .then(response => response.json())
-        .then(() => {
-            notificationsList.innerHTML = "<p class='text-center'>No new notifications</p>";
-            notifCount.innerText = "0";
-            notifCount.style.display = "none";
-        });
-    });
-
-    // Hide notification dropdown when clicking outside
-    document.addEventListener("click", function (event) {
-        if (!notifDropdown.contains(event.target) && event.target !== notificationBtn) {
-            notifDropdown.style.display = "none";
+                    notificationsList.innerHTML = notifHTML;
+                    notifCount.innerText = notifData.length;
+                    notifCount.style.display = notifData.length > 0 ? "inline-block" : "none";
+                })
+                .catch(error => console.error("Error fetching notifications:", error));
         }
-    });
 
-    // Fetch notifications every 15 seconds
-    setInterval(fetchNotifications, 15000);
-});
+        // Mark all notifications as read
+        markReadBtn.addEventListener("click", function () {
+            fetch("{% url 'mark_notifications_as_read' %}", {
+                method: "POST",
+                headers: { "X-CSRFToken": "{{ csrf_token }}" },
+            })
+                .then(response => response.json())
+                .then(() => {
+                    notificationsList.innerHTML = "<p class='text-center'>No new notifications</p>";
+                    notifCount.innerText = "0";
+                    notifCount.style.display = "none";
+                });
+        });
+
+        // Hide notification dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!notifDropdown.contains(event.target) && event.target !== notificationBtn) {
+                notifDropdown.style.display = "none";
+            }
+        });
+
+        // Fetch notifications every 15 seconds
+        setInterval(fetchNotifications, 15000);
+    });
 </script>
 
 </html>

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 <style>
   /* Ensures uniform container behavior */
   .container {
@@ -141,21 +140,22 @@
 
         <div class="d-flex justify-content-between job-actions">
           <a href="javascript:void(0);" class="view-details-btn text-decoration-none" 
-             onclick="openJobModal(
-               '{{forloop.counter}}. {{ job.job_title.job_title }}', 
-               '{{ job.job_title.id }}', 
-               '{{ job.id }}', 
-               '{{ job.company.name }}', 
-               '{{ job.location }}', 
-               '{{ job.job_type }}', 
-               '{{ job.job_description }}',
-               '{{ job.highest_qualification }}', 
-               '{{ job.percent_criteria }}', 
-               '{{ job.skills_required }}', 
-               '{{ job.Lastdate }}', 
-               '{{ job.dateofpublish }}')">
-            View Details
-          </a>
+          onclick="openJobModal(
+            `{{ forloop.counter }}. {{ job.job_title.job_title|escapejs }}`, 
+            `{{ job.job_title.id|escapejs }}`, 
+            `{{ job.id|escapejs }}`, 
+            `{{ job.company.name|escapejs }}`, 
+            `{{ job.location|escapejs }}`, 
+            `{{ job.job_type|escapejs }}`, 
+            `{{ job.job_description|escapejs }}`,
+            `{{ job.highest_qualification|escapejs }}`, 
+            `{{ job.percent_criteria|escapejs }}`, 
+            `{{ job.skills_required|escapejs }}`, 
+            `{{ job.Lastdate|escapejs }}`, 
+            `{{ job.dateofpublish|escapejs }}`)">
+          View Details
+       </a>
+       
         </div>
       </div>
     </div>

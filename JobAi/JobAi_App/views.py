@@ -25,7 +25,6 @@ import json
 
 openai.api_key = settings.OPENAI_API_KEY
 
-
 def jobseeker_login(request):
     if request.method == "POST":
         Email = request.POST.get("email")
@@ -951,9 +950,11 @@ def company_settings(request):
         } 
     if request.method == "POST":
         comp_logo = request.FILES.get('company_logo')
+        description=request.POST.get('company_desc')
         comp = Company.objects.get(id=cid)
         if comp_logo: 
             comp.profile_img = comp_logo
+            comp.description=description
             comp.save()
             messages.success(request, "Logo Uploaded successfully!!")    
         return render(request, 'company_settings_view.html', context)
@@ -1207,7 +1208,7 @@ def jobseeker_dashboard(request):
     compcount = company.count()
     rejected=JobApplication.objects.filter(jobseeker_id__name=fname,status="Rejected").count()
     shortlisted=JobApplication.objects.filter(jobseeker_id__name=fname,status="Accepted").count()
+    pending=JobApplication.objects.filter(jobseeker_id__name=fname,status="Applied").count()
     jobseeker = jobseeker_profile.objects.get(name=fname)
     unread_notifications = JobNotification.objects.filter(jobseeker_profile=jobseeker, is_read=False).count()
-    return render(request, 'jobseeker_dashboard.html', {"fname":fname, "jcount":jcount, "compcount":compcount,"shortlisted_count":shortlisted,"rejected":rejected, "company":company, "jsdt":jobseeker,"ajcount":ajcount,"count":unread_notifications})
-
+    return render(request, 'jobseeker_dashboard.html', {"fname":fname, "jcount":jcount,"pending_count":pending, "compcount":compcount,"shortlisted_count":shortlisted,"rejected":rejected, "company":company, "jsdt":jobseeker,"ajcount":ajcount,"count":unread_notifications})

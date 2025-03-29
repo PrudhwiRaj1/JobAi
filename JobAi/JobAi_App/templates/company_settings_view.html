@@ -98,7 +98,7 @@
     }, 5000);
 </script>
 {% endif %}
-    <h2 class="mb-4 ms-2">Company Settings <a href="{%url 'company_ch_pwd'%}"><span class="btn btn-primary text-white fw-bold rounded-border-1 fas fa-eye-slash" style="margin-left: 600px;" > Change Password</span></a></h2>
+    <h2 class="mb-4 ms-2">Company Settings <a href="{%url 'company_ch_pwd'%}"><span class="btn btn-primary text-white fw-bold rounded-border-1" style="margin-left: 600px;"><i class="fas fa-lock"></i> Change Password</span></a></h2>
 
     <div class="row">
         <!-- Company Profile Section -->
@@ -148,7 +148,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Company Description</label><span class="text-danger mx-1">*</span>
-            <textarea class="form-control input-bg" name="company_desc" rows="3" required></textarea>
+            <textarea class="form-control input-bg" name="company_desc" rows="3" placeholder="Type a brief description about your Company" required></textarea>
         </div>
         <div class="mb-3">
             <label class="form-label">Number of Employees</label><span class="text-danger mx-1">*</span>

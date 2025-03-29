@@ -16,6 +16,7 @@
         display: inline-block;
         transition: transform 0.3s ease;
     }
+
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f8f9fa;
@@ -35,7 +36,7 @@
         color: white;
         padding: 20px;
         border-radius: 10px;
-    } 
+    }
 
     .profile-img {
         width: 80px;
@@ -50,14 +51,43 @@
         color: white;
         border-radius: 10px;
     }
-   .container{
-    width: 90%;
-   }
-    .bg-blue { background-color: #007bff; }
-    .bg-green { background-color: #28a745; }
-    .bg-orange { background-color: #fd7e14; }
-    .bg-red { background-color: #dc3545; }
-    .bg-pink { background-color: #7c0713; }
+
+    .container {
+        width: 90%;
+    }
+
+    .job-card {
+        height: 80px;
+        padding: 20px;
+    }
+
+    .bg-blue {
+        background-color: #007bff;
+    }
+
+    .bg-green {
+        background-color: #28a745;
+    }
+
+    .bg-orange {
+        background-color: #fd7e14;
+    }
+
+    .bg-red {
+        background-color: #dc3545;
+    }
+
+    .bg-pink {
+        background-color: #7c0713;
+    }
+
+    .align-text {
+        text-align: justify;
+    }
+
+    .job-card:hover {
+        background-color: rgb(209, 233, 241);
+    }
 
     .collapse-toggle:hover .down-icon {
         transform: scale(1.2);
@@ -92,41 +122,43 @@
                     </div>
                 </div>
             </div>
-      
-    <div class="row mt-4 mb-4 d-flex justify-content-center w-150 gap-6">
-        <!-- <div class="col-lg-3 d-flex align-items-stretch">
+
+            <div class="row mt-4 mb-4 d-flex justify-content-center w-150 gap-6">
+                <!-- <div class="col-lg-3 d-flex align-items-stretch">
             <div class="stat-card bg-blue w-100">
                 <h5 class="text-white fw-bold">Total Jobs</h5>
                 <h2 class="text-white ps-4"><i class="fas fa-briefcase"></i> {{ jcount }} </h2>
             </div>
         </div> -->
-        <div class="col-lg-3 d-flex align-items-stretch">
-            <div class="stat-card bg-green w-100">
-                <h5 class="text-white fw-bold">Applied Jobs</h5>
-                <h2 class="text-white ps-5"><i class="fas fa-inbox"></i> {{ ajcount }} </h2>
+                <div class="col-lg-3 d-flex align-items-stretch">
+                    <div class="stat-card bg-green w-100">
+                        <h5 class="text-white fw-bold">Applied Jobs</h5>
+                        <h2 class="text-white ps-5 ms-3"><i class="fas fa-inbox"></i> {{ ajcount }} </h2>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-stretch">
+                    <div class="stat-card bg-orange w-100">
+                        <h5 class="text-white fw-bold">Pending Jobs</h5>
+                        <h2 class="text-white ps-5 ms-3"><i class="fas fa-sync"></i> {{ pending_count|default:'0' }}
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-stretch">
+                    <div class="stat-card bg-pink w-100">
+                        <h5 class="text-white fw-bold">Shortlisted Jobs</h5>
+                        <h2 class="text-white ps-5 ms-3"><i class="fas fa-check-circle"></i> {{ shortlisted_count }}
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-stretch">
+                    <div class="stat-card bg-danger w-100">
+                        <h5 class="text-white fw-bold">Rejected Jobs</h5>
+                        <h2 class="text-white ps-5 ms-3"><i class="fas fa-times-circle"></i> {{ rejected }} </h2>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 d-flex align-items-stretch">
-            <div class="stat-card bg-orange w-100">
-                <h5 class="text-white fw-bold">Pending</h5>
-                <h2 class="text-white ps-5"><i class="fas fa-sync"></i> {{ shortlisted_count }} </h2>
-            </div>
-        </div>
-        <div class="col-lg-3 d-flex align-items-stretch">
-            <div class="stat-card bg-pink w-100">
-                <h5 class="text-white fw-bold">Shortlisted</h5>
-                <h2 class="text-white ps-5"><i class="fas fa-check-circle"></i> {{ shortlisted_count }} </h2>
-            </div>
-        </div>
-        <div class="col-lg-3 d-flex align-items-stretch">
-            <div class="stat-card bg-danger w-100">
-                <h5 class="text-white fw-bold">Rejected </h5>
-                <h2 class="text-white ps-5"><i class="fas fa-times-circle"></i> {{ rejected }} </h2>
-            </div>
-        </div>
-    </div>
 
-        
+
             <!-- Tabs -->
             <ul class="nav nav-pills mb-3">
                 <li class="nav-item">
@@ -145,23 +177,24 @@
                 <div id="jobs" class="tab-pane fade show active">
                     <div class="card p-3 mb-3">
                         <h5>Active Job Postings</h5>
-                        <p>You can search all job openings here.</p>
+                        <p>You can search all <b>{{ jcount }}</b> job openings here.</p>
                         <a href="{% url 'search-job' %}">
-                            <button class="btn btn-primary"><i class="fas fa-search"></i> Search For Job</button>
+                            <button class="btn btn-primary"><i class="fas fa-search"></i> Search For Jobs</button>
                         </a>
                     </div>
                 </div>
 
                 <!-- Companies Section -->
                 <div id="company-tab" class="tab-pane fade">
-                    <div class="card p-3 mb-3">
+                    <div class="card p-3 mb-3 shadow-sm">
                         <h5>Companies Here</h5>
-                        <p>You have the opportunity to apply to jobs posted by companies listed below.</p>
+                        <p>You have the opportunity to apply to jobs posted by the companies listed below.</p>
                         <!-- Down arrow icon -->
                         <div class="d-flex justify-content-center">
-                            <a class="collapse-toggle text-secondary" data-bs-toggle="collapse" href="#companiesCollapse" role="button"
-                                aria-expanded="false" aria-controls="companiesCollapse">
-                                <i class="bi bi-chevron-double-down down-icon"></i>
+                            <a class="collapse-toggle text-secondary" data-bs-toggle="collapse"
+                                href="#companiesCollapse" role="button" aria-expanded="false"
+                                aria-controls="companiesCollapse">
+                                <i class="bi bi-chevron-double-down down-icon fs-4"></i>
                             </a>
                         </div>
                     </div>
@@ -171,10 +204,22 @@
                         <div class="row">
                             {% for i in company %}
                             <div class="col-md-6 mb-4">
-                                <div class="card job-card px-2 text-justify">
-                                    <div class="d-flex align-items-center">
-                                        <img src="{{ i.profile_img.url }}" class="rounded-circle me-3" width="40">
-                                        <h5 class="job-title ms-2 text-dark">{{ i.name }}</h5>
+                                <div class="card job-card p-3 shadow-sm border-0">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ i.profile_img.url }}" class="rounded-circle me-3" width="50"
+                                                height="50">
+                                            <h5 class="job-title ms-2 text-dark mb-0">{{ i.name }}</h5>
+                                        </div>
+                                        {% if i.description and i.description != "null" %}
+                                        <!-- Modal Trigger Button -->
+                                        <button
+                                            class="btn btn-sm btn-outline-primary d-flex align-items-justify justify-content-between"
+                                            data-bs-toggle="modal" data-bs-target="#companyModal"
+                                            data-name="{{ i.name }}" data-description="{{ i.description }}">
+                                            <i class="bi bi-info-square-fill me-2"></i> View Info
+                                        </button>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -183,77 +228,110 @@
                             {% endfor %}
                         </div>
                     </div>
-                    
                 </div>
+
+                <!-- Bootstrap Modal -->
+                <div class="modal fade" id="companyModal" tabindex="-1" aria-labelledby="companyModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="companyModalLabel"></h5>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+                            </div>
+                            <div class="modal-body" id="companyModalDescription"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JavaScript to Handle Modal Content -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const companyModal = document.getElementById("companyModal");
+
+                        companyModal.addEventListener("show.bs.modal", function (event) {
+                            const button = event.relatedTarget;  // Button that triggered the modal
+                            const name = button.getAttribute("data-name");
+                            const description = button.getAttribute("data-description");
+
+                            // Update modal content
+                            document.getElementById("companyModalLabel").textContent = name;
+                            document.getElementById("companyModalDescription").textContent = description;
+                        });
+                    });
+                </script>
+
+
                 <div id="Applied_job" class="tab-pane fade show">
                     <div class="card p-3 mb-3">
                         <h5>Applied Jobs</h5>
                         {% if ajcount and ajcount|add:0 > 0 %}
                         <p>You can view your job application(s) here.</p>
                         <a href="{% url 'applied-jobs' %}">
-                            <button class="btn btn-primary"><i class="bi bi-eye-fill"></i> View Applied Jobs</button><!-- Down arrow icon -->
+                            <button class="btn btn-primary"><i class="bi bi-eye-fill"></i> View Applied
+                                Jobs</button><!-- Down arrow icon -->
                         </a>
                         {%else%}
                         <p>You didn't applied for any jobs yet</p>
                         {%endif%}
-                         </div>
+                    </div>
                 </div>
             </div>
-                <!-- Messages Alert -->
-                {% if messages %}
-                {% for message in messages %}
-                <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} fw-bold text-dark"
-                    id="message-container">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Notification</h5>
-                                <button type="button" class="close-btn btn btn-danger"
-                                    onclick="closeMessageModal()">X</button>
-                            </div>
-                            <div class="modal-body">
-                                <div role="alert">
-                                    {{ message }}
-                                </div>
+            <!-- Messages Alert -->
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} fw-bold text-dark"
+                id="message-container">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Notification</h5>
+                            <button type="button" class="close-btn btn btn-danger"
+                                onclick="closeMessageModal()">X</button>
+                        </div>
+                        <div class="modal-body">
+                            <div role="alert">
+                                {{ message }}
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-                {% endif %}
+            </div>
+            {% endfor %}
+            {% endif %}
 
-                <!-- JavaScript to Auto-Close on Click -->
-                <script>
-                    function closeMessageModal() {
-                        document.getElementById("message-container").style.display = "none";
+            <!-- JavaScript to Auto-Close on Click -->
+            <script>
+                function closeMessageModal() {
+                    document.getElementById("message-container").style.display = "none";
+                }
+                setTimeout(function () {
+                    let messageContainer = document.getElementById("message-container");
+                    if (messageContainer) {
+                        messageContainer.style.transition = "opacity 0.5s";
+                        messageContainer.style.opacity = "1"; // Fade out effect
+                        setTimeout(() => messageContainer.remove(), 500); // Remove from DOM
                     }
-                    setTimeout(function () {
-                        let messageContainer = document.getElementById("message-container");
-                        if (messageContainer) {
-                            messageContainer.style.transition = "opacity 0.5s";
-                            messageContainer.style.opacity = "1"; // Fade out effect
-                            setTimeout(() => messageContainer.remove(), 500); // Remove from DOM
-                        }
-                    }, 1000);
-                    document.addEventListener("DOMContentLoaded", function () {
-                        var collapseToggle = document.querySelector('.collapse-toggle');
-                        var downIcon = document.querySelector('.down-icon');
-                        var companiesCollapse = document.getElementById('companiesCollapse');
+                }, 1000);
+                document.addEventListener("DOMContentLoaded", function () {
+                    var collapseToggle = document.querySelector('.collapse-toggle');
+                    var downIcon = document.querySelector('.down-icon');
+                    var companiesCollapse = document.getElementById('companiesCollapse');
 
-                        companiesCollapse.addEventListener('shown.bs.collapse', function () {
-                            // When shown, change icon to an upward chevron
-                            downIcon.classList.remove('bi-chevron-double-down');
-                            downIcon.classList.add('bi-chevron-double-up');
-                            // Optionally add rotation animation
-                            downIcon.classList.add('rotate');
-                        });
-
-                        companiesCollapse.addEventListener('hidden.bs.collapse', function () {
-                            // When hidden, revert to the downward chevron
-                            downIcon.classList.remove('bi-chevron-double-up', 'rotate');
-                            downIcon.classList.add('bi-chevron-double-down');
-                        });
+                    companiesCollapse.addEventListener('shown.bs.collapse', function () {
+                        // When shown, change icon to an upward chevron
+                        downIcon.classList.remove('bi-chevron-double-down');
+                        downIcon.classList.add('bi-chevron-double-up');
+                        // Optionally add rotation animation
+                        downIcon.classList.add('rotate');
                     });
-                </script>
 
-                {% endblock %}
+                    companiesCollapse.addEventListener('hidden.bs.collapse', function () {
+                        // When hidden, revert to the downward chevron
+                        downIcon.classList.remove('bi-chevron-double-up', 'rotate');
+                        downIcon.classList.add('bi-chevron-double-down');
+                    });
+                });
+            </script>
+
+            {% endblock %}

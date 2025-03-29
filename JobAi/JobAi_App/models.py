@@ -44,6 +44,7 @@ class Company(models.Model):
     password=models.CharField(max_length=255)
     # Links to Django's built-in User model
     name = models.CharField(max_length=255)
+    description=models.CharField(max_length=12000,null=True)
     email = models.EmailField(unique=True)
     company_type = models.ForeignKey(Company_Type_Master,on_delete=models.CASCADE,default=None)
     address = models.CharField(max_length=255)
